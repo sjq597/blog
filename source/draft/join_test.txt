@@ -1,0 +1,48 @@
+Hive Join总结
+join的用法大概意思都明白,细节在重复元素的处理,先上一sql里的图
+http://blog.csdn.net/xyilu/article/details/8112747
+
+CREATE TABLE dw_temp.left_table (
+  int int,
+  name string
+)ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+load data local inpath '/home/temp/left.txt' overwrite into table dw_temp.left_table;
+1	zhang.san
+2	li.si
+3	wang.wu
+4	zhao.liu
+
+CREATE TABLE dw_temp.right_table (
+  name string,
+  money int
+)ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+load data local inpath '/home/temp/right.txt' overwrite into table dw_temp.left_table;
+zhang.san	12
+zhang.san	121
+zhang.san	122
+li.si	13
+wang.wu	14
+admin 15
+
+join
+id	t1.name	money
+1	zhang.san	12
+1	zhang.san	121
+1	zhang.san	122
+2	li.si	13
+3	wang.wu	14
+
+left join
+id	t1.name	money
+1	zhang.san	12
+1	zhang.san	121
+1	zhang.san	122
+2	li.si	13
+3	wang.wu	14
+4	zhao.liu	NULL

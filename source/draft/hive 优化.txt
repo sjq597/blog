@@ -1,0 +1,24 @@
+尽量不要使用distinct 例子ap_user_order_status_desc_snap 总记录条数763191489，即将近8亿条记录 108.877GB
+订单号是没有重复的
+select count(distinct order_no) from ap_user_order_status_desc_snap;
+Stage-Stage-1: Map: 396  Reduce: 1   Cumulative CPU: 7915.67 sec   HDFS Read: 119072894175 HDFS Write: 10 SUCCESS
+Total MapReduce CPU Time Spent: 0 days 2 hours 11 minutes 55 seconds 670 msec
+OK
+_c0
+763191489
+Time taken: 1818.864 seconds, Fetched: 1 row(s)
+
+select count(t.order_no) from (select order_no from ap_user_order_status_desc_snap group by order_no) t;
+Stage-Stage-1: Map: 396  Reduce: 457   Cumulative CPU: 10056.7 sec   HDFS Read: 119074266583 HDFS Write: 53469 SUCCESS
+Stage-Stage-2: Map: 177  Reduce: 1   Cumulative CPU: 280.22 sec   HDFS Read: 472596 HDFS Write: 10 SUCCESS
+Total MapReduce CPU Time Spent: 0 days 2 hours 52 minutes 16 seconds 920 msec
+OK
+_c0
+763191489
+Time taken: 244.192 seconds, Fetched: 1 row(s)
+
+第二种写法的性能是第一种的7.448499541倍
+
+查看hive表大小
+hadoop fs -ls  /user/hive/warehouse/test_table/ds=20151111|awk -F ' ' '{print $5}'|awk '{a+=$1}END{print a}'
+

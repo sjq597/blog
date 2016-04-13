@@ -1,0 +1,31 @@
+git log --graph
+
+* commit e4985f8fdac2b14468c0348e88180b5348417d04
+| Author: junqiang.shen <junqiang.shen@qunar.com>
+| Date:   Fri Dec 18 18:03:44 2015 +0800
+| 
+|     支付抽取库 bugfix
+|  
+* commit 5bb4f8e49f26e27991d9ab84812cd6eb5a0a3dd6
+| Author: junqiang.shen <junqiang.shen@qunar.com>
+| Date:   Fri Dec 18 17:27:21 2015 +0800
+| 
+|     支付历史数据抽取完成,,删除配置文件
+|  
+* commit d835c652209ad430decdef28498d03379b06ae06
+| Author: junqiang.shen <junqiang.shen@qunar.com>
+| Date:   Fri Dec 18 16:44:04 2015 +0800
+| 
+|     重构月活跃用户统计,格式化按天,按周命名
+
+在commit 5bb4f8e49f26e27991d9ab84812cd6eb5a0a3dd6这次提交删错了文件
+
+那么其实我是想把文件恢复到这个提交之前的一个版本,假设被删除的文件在当前项目的目录是
+/java/project/test.conf
+
+执行:
+git checkout "5bb4f8e~1" /java/project/test.conf
+
+或者
+git checkout d835c65 /java/project/test.conf
+

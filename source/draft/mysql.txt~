@@ -1,0 +1,13 @@
+sudo chown -R junqiangshen:junqiangshen /var/lib/mysql 
+
+切库报错：
+mysql> show databases;
+ERROR 1018 (HY000): Can't read dir of '.' (errno: 13)
+
+sudo chown -R mysql:mysql /var/lib/mysql
+
+sudo mysql -uroot --local-infile=1 -p
+
+use learn_sql;
+
+LOAD DATA LOCAL INFILE '/home/junqiangshen/desktop/oc_daily_order_cheche.txt' REPLACE INTO TABLE oc_daily_order_cheche FIELDS TERMINATED BY '\t';

@@ -1,0 +1,68 @@
+Ubuntu 14.04 Pentaho Report Desginer 使用
+运行报表设计工具
+cd /usr/report-designer
+./report-designer.sh
+
+报错:
+Error connecting to database [report] : org.pentaho.di.core.exception.KettleDatabaseException: 
+Error occurred while trying to connect to the database
+
+Driver class 'org.gjt.mm.mysql.Driver' could not be found, make sure the 'MySQL' driver (jar file) is installed.
+org.gjt.mm.mysql.Driver
+
+
+org.pentaho.di.core.exception.KettleDatabaseException: 
+Error occurred while trying to connect to the database
+
+Driver class 'org.gjt.mm.mysql.Driver' could not be found, make sure the 'MySQL' driver (jar file) is installed.
+org.gjt.mm.mysql.Driver
+	...................
+	at org.pentaho.di.core.database.Database.connectUsingClass(Database.java:466)
+	... 124 more
+
+Hostname       : localhost
+Port           : 3306
+Database name  : report
+
+网上查了解决方案,都是在Windows系统下,有的说把数据库驱动放到lib文件夹的ext文件夹目录下
+➜  report-designer  tree -L 1
+.
+├── ChangeLog.txt
+├── configuration-template
+├── docs
+├── launcher.jar
+├── launcher.properties
+├── lib
+├── PentahoReporting_OSS_Licenses.html
+├── plugins
+├── README.txt
+├── report-designer.bat
+├── report-designer.sh
+├── resources
+├── samples
+├── set-pentaho-env.bat
+├── set-pentaho-env.sh
+└── templates
+因为之前装过idea,所以直接到idea的目录下拷贝了驱动
+➜  ~  cd ~/.IntelliJIdea14/config/jdbc-drivers 
+➜  jdbc-drivers  ls
+mysql-connector-java-5.1.35-bin.jar  postgresql-9.4-1201.jdbc4.jar
+mysql-connector-license.txt          postgresql-driver-license.txt
+➜  jdbc-drivers  sudo cp mysql-connector-java-5.1.35-bin.jar /usr/qunar/report-designer/lib/ext/
+
+重启发现还是报错,最后去看了一下这个目录结构,发现lib下有个jdbc的目录,进去一看,发现啥数据库的驱动都有,就是没有mysql的,fuck!!!!!
+拷进去,重启,然后Test,搞定
+![]()
+
+新建一条查询语句,现在report库里止呕一个数据表syscode_business_type
+点击右上角的Add Query新建一条查询语句
+![]()
+第一次无法预览,需要先编辑,然后直接点OK就可以了,回到原来的界面就可以预览了
+
+
+设计报表格式
+
+
+
+
+
