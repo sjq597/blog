@@ -39,6 +39,10 @@ git pull    # 相当于git fetch 和 git merge
 Branch init set up to track remote branch init from origin.
 Switched to a new branch 'init'
 ```
+如果有时候建分支忘了指定本地分支和远端的哪个分支对应，需要设定分支的远端对应分支可以这样，假设我想让我的本地master分支追踪远端的master分支：
+```bash
+git branch --track master origin/master
+```
 
 #### 提交修改
 添加一个新文件，`git`不会自动跟踪，需要手动
