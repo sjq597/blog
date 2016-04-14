@@ -92,3 +92,13 @@ git config --local user.email emailaddress
 git config --global core.editor vim
 ```
 
+
+### Git错误信息汇总
+1. git push 出错
+```
+fatal: The current branch master has multiple upstream branches, refusing to push.
+```
+解决办法：
+```bash
+➜  git config remote.origin.push HEAD
+```
