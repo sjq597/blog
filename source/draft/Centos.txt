@@ -1,0 +1,1 @@
+locate centos 查找文件位置

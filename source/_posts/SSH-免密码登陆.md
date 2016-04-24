@@ -10,6 +10,7 @@ categories: Linux使用
 服务器：CentOS
 
 ### 大概流程
+需要服务器和本机都做一定的配置才能免密码登陆
 #### 本地机器配置
 1. 通过`ssh-keygen`产生RSA公私密钥对
 
@@ -47,7 +48,7 @@ $ sudo chmod 644 authorized_keys
 $ sudo service sshd restart
 ```
 
-####　本机测试
+#### 本机测试
 通过终端连接服务器
 ```
 $ ssh my_server
