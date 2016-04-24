@@ -109,3 +109,9 @@ hive> select 1 from tabe_name where 'footbar’ rlike '^f.*r$’;
 hive> select 1 from table_name where 'footbar' REGEXP '^f.*r$';
 1
 ```
+
+### 查看命令
+1. 查看Hive表大小
+```
+hadoop fs -ls  /user/hive/warehouse/test_table/ds=20151111|awk -F ' ' '{print $5}'|awk '{a+=$1}END{print a}'
+```
