@@ -11,6 +11,11 @@ categories: Flask
 ```
 $ sudo apt-get install python-virtualenv
 ```
+或者使用pip安装:
+```
+$ $ sudo pip install virtualenv
+```
+如果你是Windows用户，并且你已经安装了`pip`工具，则去掉`sudo`在cmd命令下也可以安装
 然后创建一个包含`venv`的文件夹的项目文件夹，项目就建在这里面
 ```
 $ sudo mkdir flask_project
@@ -25,7 +30,7 @@ $ . venv/bin/activate
 ```
 pip install flask
 ```
-**注意:**这里有个地方需要个别强调一下，安装包不能使用sudo权限来安装，如果不带`sudo`暗转提示权限不够，请把`flask_project`文件夹的权限设置为当前用户,例如，当前用户为`zhangsan`,在`flask_project`的父目录执行:
+**注意:**这里有个地方需要个别强调一下，安装包不能使用sudo权限来安装，如果不带`sudo`安装提示权限不够，请把`flask_project`文件夹的权限设置为当前用户,例如，当前用户为`zhangsan`,在`flask_project`的父目录执行:
 ```
 sudo chown zhangsan:zhangsan -R flask_project
 ```
