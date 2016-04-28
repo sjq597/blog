@@ -123,4 +123,25 @@ def projects():
 def about():
     return 'The about page'
 ```
-注意一个尾部有`/`，一个没有。看上去带`/`的URL很像一个文件夹，当我们访问一个没有带`/`的URL的时候，为自动加一个`/`。但是反过来，如果访问第二个URL你在尾部带了一个`/`，则会报错。可能你有些疑惑，为啥要这么做，答案也很简单：这样在访问一个不带`/`的URL时，不管真正的URL是否带`/`我们都可以继续访问URL,并且URL是唯一的。
+注意一个尾部有**斜杠**，一个没有。看上去带**斜杠**的URL很像一个文件夹，当我们访问一个没有带**斜杠**的URL的时候，为自动加一个**斜杠**。但是反过来，如果访问第二个URL你在尾部带了一个**斜杠**，则会报错。可能你有些疑惑，为啥要这么做，答案也很简单：这样在访问一个不带**斜杠**的URL时，不管真正的URL是否带**斜杠**我们都可以继续访问URL,并且URL是唯一的。
+
+#### URL构建
+设想一下，你想先设定好页面的访问URL,你需要测试你写的函数能不能被你指定的URL访问到，直接构建这些URL就可以了。`url_for`它把函数名称作为第一个参数，其余参数对应URL中的变量。未知变量将添加到URL中作为查询参数。 例如：
+```
+from flask import Flask, url_for
+app = Flask(__name__)
+@app.route('/')
+def index(): pass
+
+@app.route('/login')
+def login(): pass
+
+@app.route('/user/<username>')
+def profile(username): pass
+
+with app.test_request_context():
+	print url_for('index')
+	print url_for('login')
+	print url_for('login', next='/')
+	print url_for('profile', username='John Doe')
+```
