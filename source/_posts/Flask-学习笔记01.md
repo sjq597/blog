@@ -290,4 +290,70 @@ def page_not_found(error):
 ```
 
 #### 关于响应
-视图函数的返回值会自动转化为一个响应对象。如果你返回一个字符串，那么就会被
+视图函数的返回值会自动转化为一个响应对象。如果你返回一个字符串，那么就会被转换为一个响应对象，其中包含这个字符串以及一些其他的必要信息，如果想在视图内部掌控响应对象的结果，可以使用一个`make_response()`函数进行强制转换，例如原始视图:
+```
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('error.html'), 404
+```
+可以手动包装，修改某些特定的内容，例如头部信息：
+```
+@app.errorhandler(404)
+def not_found(error):
+    resp = make_response(render_template('error.html'), 404)
+    resp.headers['X-Something'] = 'A value'
+    return resp
+```
+
+#### 会话
+除了请求对象和响应对象之外，还有个`session`这个对象，这个主要是用来在不同请求之间存储信息的。你可以简单理解为用密钥签名加密的cookie,cookie都可以查看，但是如果没有密钥就无法修改。所以使用会话之前必须设置一个密钥：
+```
+from flask import Flask, session, redirect, url_for, escape, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    if 'username' in session:
+        return 'Logged in as %s' % escape(session['username'])
+    return 'You are not logged in'
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        session['username'] = request.form['username']
+        return redirect(url_for('index'))
+    return '''
+        <form action="" method="post">
+            <p><input type=text name=username>
+            <p><input type=submit value=Login>
+        </form>
+    '''
+
+@app.route('/logout')
+def logout():
+    # 如果会话中有用户名就删除它。
+    session.pop('username', None)
+    return redirect(url_for('index'))
+
+# 设置密钥，复杂一点：
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+```
+`escape()`可以用来转义，如果你使用模板就简单的多，不用管这些。
+生成密钥要保证做够随机,例如根据操作系统来生成一个密钥:
+```
+import os
+os.urandom(24)
+```
+基于`cookies`的会话，Flask其实是把会话对象里面的值都放在了cookies里面，如果你访问的会话里没有对应的属性。
+
+#### 消息闪现
+啥意思？简单来说就是在你请求结束的时候记录一个消息，然后你下次再请求的时候可以使用，然后用完就销毁了，所以叫闪现。`flash()`用于闪现一个消息，`get_flashed_messages()`来操作一个消息，具体的不介绍了，这个用的不是很多，用到再研究。
+
+#### 日志
+一个Web应用当然少不了日志，万一崩了，直接看日志定位问题，使用也很简单:
+```
+app.logger.debug('A value for debugging')
+app.logger.warning('A warning occurred (%d apples)', 42)
+app.logger.error('An error occurred')
+```
