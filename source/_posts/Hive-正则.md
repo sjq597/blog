@@ -31,11 +31,11 @@ from
 这两个正则表达式是一样的，其实确认你的HQL正则表达式是否有用，可以先用echo在sudo前面看看，如果输出的史`\\d`则说明有用
 
 ### Python
-有时候需要在Python中执行HQL,好像Hive并不支持Hive,所以我采取的是在Python中执行Shel命令
+有时候需要在Python中执行HQL,好像Hive并不支持Python接口,所以我采取的是在Python中执行Shel命令
 ```python
 # bash_cmd为Shell命令
 bash_cmd = """
-sudo -uhive_test /usr/dev/hive-1.2.0/bin/hive -e "{0}"
+sudo -uhive_user /usr/dev/hive-1.2.0/bin/hive -e "{0}"
 """.format(sql)	# sql即为要执行的HQL
 
 hql_process = subprocess.Popen(bash_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -49,4 +49,3 @@ from
   test.table_test;
 """
 ```
-

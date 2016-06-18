@@ -1,7 +1,7 @@
 title: Ubuntu 14.04 MySQL 从本地文件批量导入数据
 date: 2015-11-22 11:10:26
 tags: [SQL,Linux]
-categories: SQL
+categories: MySQL
 ---
 想做几个数据测试，于是把服务器上的`mysql`数据查询结果导入到服务器本地一个文件中，然后下载到本地机器想直接导入到自己机器的mysql表中:
 假设我的MySQL用户名和密码分别为:root root123456,对应的库为test,表为user

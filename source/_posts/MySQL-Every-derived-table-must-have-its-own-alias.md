@@ -1,7 +1,7 @@
 title: 'MySQL:Every derived table must have its own alias'
 date: 2015-11-11 00:38:14
-tags: [Linux,SQL]
-categories: SQL
+tags: [SQL]
+categories: MySQL
 ---
 在做多表联合查询时，报错：
 > Every derived table must have its own alias
