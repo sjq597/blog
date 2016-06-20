@@ -24,12 +24,14 @@ git fetch   # 拉取远端数据到本地，不和并
 git pull    # 相当于git fetch 和 git merge
 ```
 
-#### 新建分支
+#### 分支相关
+* 新分支
+
 把项目从服务器上拉取下来之后，一般都需要建立一个自己的分支方便开发，比如新建一个本地`test`分支
 ```bash
 ➜  data git:(master) git checkout test
 ```
-**注意：** 如果你只是想看看项目里的分支代码，不想新建一个分支，有时候拉取的分支可能没有包括你想要看的分支，这个时候可以按照下面来做：
+**注意：** 如果你只是想看看项目里的分支代码，不想新建一个分支，有时候拉取的分支可能包括你想要看的分支，这个时候可以按照下面来做：
 ```bash
 ➜  data git:(master) git branch -r
   origin/HEAD -> origin/master
@@ -39,9 +41,37 @@ git pull    # 相当于git fetch 和 git merge
 Branch init set up to track remote branch init from origin.
 Switched to a new branch 'init'
 ```
+后面的`origin/init`可以省略，默认创建本地的`init`分支上游分支为`origin/init`.
 如果有时候建分支忘了指定本地分支和远端的哪个分支对应，需要设定分支的远端对应分支可以这样，假设我想让我的本地master分支追踪远端的master分支：
 ```bash
-git branch --track master origin/master
+git branch --track master origin/master	
+```
+不过貌似这种方式不推荐了
+例如远端有个Python分支,那么想让本地分支追踪远端的Python分支，可以：
+```bash
+# 将本地的Python和远端仓库origin的Python分支关联
+git branch --set-upstream-to=origin/Python Python
+```
+
+* 删除分支
+
+```
+git branch -d -r <branch_name>
+git branch -D -r <branch_name>	# 强制删除
+```
+
+* 分支重命名
+
+```
+git branch -m <new_name>	# 重命名当前分支
+git branch -m <old_branch> <new_branch>	# 重命名指定分支
+```
+
+* 删除缓存分支
+
+有时候远端的分支已经删除了,使用`git branch -a`仍然可以看到那些被删除的分支，清除远端分支缓存
+```
+git fetch origin --prune
 ```
 
 #### 提交修改
@@ -63,13 +93,6 @@ git push origin test
 ```
 *.txt   # 忽略所有的txt文本文件
 dir/    # 忽略项目根目录下dir文件夹里所有的文件
-```
-
-#### 指定关联分支
-例如远端有个Python分支,那么想让本地分支追踪远端的Python分支，可以：
-```bash
-# 将本地的Python和远端仓库origin的Python分支关联
-git branch --set-upstream-to=origin/Python Python
 ```
 
 #### 查看某次修改内容
@@ -94,7 +117,8 @@ git config --global core.editor vim
 
 
 ### Git错误信息汇总
-1. git push 出错
+* git push 出错
+
 ```
 fatal: The current branch master has multiple upstream branches, refusing to push.
 ```
