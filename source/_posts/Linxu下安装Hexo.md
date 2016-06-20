@@ -323,3 +323,14 @@ ERROR Deployer not found: github
 **NOTE:** 参见前面说的，`3.x.x`版本需要把`type`设置为`git`而不是`github`,并且仓库地址要写`git`的`https`地址，并且要改为`http`开头。
 
 然后再去访问你在`github`上的博客地址，就会发现变成了`hexo`的`index.html`。
+
+* Error: watch ENOSPC
+
+在终端输入:
+```
+➜  npm dedupe
+```
+如果还不管用,试试下面的命令:
+```
+➜  echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
