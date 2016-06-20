@@ -1,7 +1,7 @@
-title: 'mysql 按周,月,年统计数据'
+title: 'MySQL 按周,月,年统计数据'
 date: 2015-12-07 22:14:27
-tags: [mysql]
-categories: mysql
+tags: [SQL, Shell]
+categories: MySQL
 ---
 通常对于一个标准的时间,例如`2015-12-05 12:34:40`,如果想获取它的年月日,我们可以采取取字串的形式,即:
 ```
