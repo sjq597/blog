@@ -73,6 +73,15 @@ SparkContext available as sc, HiveContext available as sqlContext.
 
 In [1]: lines = sc.textFile("README.md")
 ```
+如果你觉得这样也有些麻烦,可以在`~/.bashrc`里面加一行:
+```
+alias ipython='IPYTHON=1'
+```
+然后就可以这么启动:
+```
+➜  ~ cd /usr/dev/spark-1.6.1-bin-hadoop2.6 
+➜  spark-1.6.1-bin-hadoop2.6 ipython bin/pyspark 
+```
 
 #### 简单样例
 Scala也不熟，就以Python为例吧,注意我的当前目录是在`/usr/dev/spark-1.6.1-bin-hadoop2.6`:
