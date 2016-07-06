@@ -1,27 +1,37 @@
 title: 终极 Shell——zsh
 date: 2015-10-05 23:53:18
-tags: [Linux,开发工具,开发环境]
-categories: Linux使用
+tags: [Linux,开发工具]
+categories: 开发环境
 ---
 目前常用的`Linux`系统和`OS X`系统的默认`Shell`都是`bash`，但是真正强大的`Shell` 是深藏不露的`zsh`， 这货绝对是马车中的跑车，跑车中的飞行车，史称『终极 Shell』，但是由于配置过于复杂，所以初期无人问津，很多人跑过来看看 zsh 的配置指南，什么都不说转身就走了。直到有一天，国外有个穷极无聊的程序员开发出了一个能够让你快速上手的zsh项目，叫做「oh my zsh」，[Github网址](https://github.com/robbyrussell/oh-my-zsh) 。
 
 好，下面我们以Ubuntu 14.04为例看看如何安装、配置和使用 zsh。
 
 ### 安装oh my zsh
-首先确保你安装了`git`，安装方式就不详细讲了。
+首先确保你安装了`git, zsh`,如果没有安装，按下面的命令来安装：
+```
+sudo apt-get install -y git
+sudo apt-get install -y zsh
+```
+装好了`zsh`还不够,还需要设置一下系统默认的shell环境:
+```
+chsh -s $(which zsh)
+```
+然后重启，或者注销系统重新登陆。
+然后就可以安装`oh-my-zsh`了:
 ```bash
 git clone git@github.com:robbyrussell/oh-my-zsh.git
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ```
-**NOTE:** 记得要重启系统，并且有个地方需要特别注意，之前的`Java`开发等环境变量都配置在了`.bashrc`文件里，如下图所示：
+**NOTE:** 有个地方要特别注意，之前的`Java`开发等环境变量都配置在了`.bashrc`文件里，如下图所示：
 ```bash
-export JAVA_HOME=/usr/qunar/jdk1.7.0_40
+export JAVA_HOME=/usr/dev/jdk1.7.0_40
 export JRE_HOME=${JAVA_HOME}/jre
 export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
 export PATH=${JAVA_HOME}/bin:$PATH
-export M2_HOME=/usr/qunar/apache-maven
+export M2_HOME=/usr/dev/apache-maven
 export PATH=$PATH:${M2_HOME}/bin
-export M2_HOME=/usr/qunar/apache-maven
+export M2_HOME=/usr/dev/apache-maven
 export PATH=$PATH:${M2_HOME}/bin
 ```
 当我安装好`oh my zsh`之后，这些环境变量都失效了，研究一番才明白，我已经把默认的shell换成`.zshrc`了。所以需要把所有的环境变量重新配置到`zshrc`里，把你需要的这些内容拷贝到`.zshrc`里即可。
@@ -52,38 +62,47 @@ alias -s tgz='tar -xzvf'
 alias -s zip='unzip'
 alias -s bz2='tar -xjvf'
 ```
-
-**NOTE:** `zsh`的牛粪之处在于不仅可以设置通用别名，还能针对文件类型设置对应的打开程序，比如：
->alias -s html=mate，意思就是你在命令行输入 hello.html，zsh会为你自动打开 TextMat 并读取  
-hello.html； alias -s gz='tar -xzvf'，表示自动解压后缀为* gz 的压缩包。
-
+**NOTE:** `zsh`的牛逼之处在于不仅可以设置通用别名，还能针对文件类型设置对应的打开程序，比如：
+```
+alias -s html=mate，意思就是你在命令行输入 hello.html，zsh会为你自动打开 TextMat 并读取  
+hello.html 
+alias -s gz='tar -xzvf'，表示自动解压后缀为gz的压缩包。
+```
 总之，只有想不到，木有做不到。
 
-####　配置主题
+#### 配置主题
 设置完环境变量和别名之后，基本上就可以用了，如果你是个主题控，还可以玩玩`zsh`的主题。在`.zshrc`里找到`ZSH_THEME`，就可以设置主题了，默认主题是：
->ZSH_THEME=”robbyrussell”
+```
+ZSH_THEME=”robbyrussell”
+```
 
 `oh my zsh`提供了数十种主题，相关文件在`~/.oh-my-zsh/themes`目录下，你可以随意选择。
 
-####插件。
+#### 插件
 `oh my zsh`项目提供了完善的插件体系，相关的文件在`~/.oh-my-zsh/plugins`目录下，默认提供了100多种，大家可以根据自己的实际学习和工作环境采用，想了解每个插件的功能，只要打开相关目录下的 zsh 文件看一下就知道了。插件也是在.zshrc里配置，找到plugins关键字，你就可以加载自己的插件了，系统默认加载 git ，你可以在后面追加内容，如下：
->plugins=(git textmate ruby autojump osx mvn gradle)
+```
+plugins=(git textmate ruby autojump osx mvn gradle)
+```
 
 下面简单介绍几个：
 
-* 1.git
+* git
+
 当你处于一个`git`受控的目录下时，`Shell 会明确显示 「git」和 branch，如下图所示：
 ![zsh-git 插件效果](http://7xn9y9.com1.z0.glb.clouddn.com/note_终极%20Shell——zsh01.png)
 
 另外对`git`很多命令进行了简化，例如`gco=’git checkout’、gd=’git diff’、gst=’git status’、g=’git’`等等，熟练使用可以大大减少`git`的命令长度，命令内容可以参考`~/.oh-my-zshplugins/git/git.plugin.zsh`
 
-* 2.textmate
+* textmate
+
 mr可以创建 ruby 的框架项目，tm finename 可以用 textmate 打开指定文件。
 
-* 3.osx
+* osx
+
 tab 增强，quick-look filename 可以直接预览文件，man-preview grep 可以生成 grep手册 的pdf 版本等。
 
-* 4.autojump
+* autojump
+
 zsh 和 autojump 的组合形成了 zsh 下最强悍的插件，今天我们主要说说这货。
 
 首先安装autojump，如果你用 Mac，可以使用 brew 安装：
