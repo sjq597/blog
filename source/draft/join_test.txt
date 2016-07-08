@@ -1,1 +1,0 @@
-hadoop fs -du /user/hive/warehouse/test_table|awk ' { SUM += $1 } END { print SUM/(1024*1024*1024) }'

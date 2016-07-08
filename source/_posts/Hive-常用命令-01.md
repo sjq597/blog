@@ -155,5 +155,6 @@ hive> select 1 from table_name where 'footbar' REGEXP '^f.*r$';
 * 查看Hive表大小
 
 ```
-hadoop fs -ls  /user/hive/warehouse/test_table/ds=20151111|awk -F ' ' '{print $5}'|awk '{a+=$1}END{print a}'
+hadoop fs -ls  /user/hive/warehouse/test_table/ds=20151111|awk -F ' ' '{print $5}'|awk '{a+=$1}END{print a/(1024*1024*1024)}'
+hadoop fs -du /user/hive/warehouse/test_table|awk ' { SUM += $1 } END { print SUM/(1024*1024*1024)}'
 ```

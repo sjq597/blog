@@ -1,2 +1,0 @@
-sudo mkdir python-project
-cd python-project/
