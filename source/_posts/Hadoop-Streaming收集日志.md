@@ -67,3 +67,12 @@ for line in sys.stdin:
 ```
 sudo -u${HADOOP_USER} ${HADOOP_HOME}/bin/hadoop fs -rm -r output_dir
 ```
+
+还有一些常用的参数设置:
+```
+-jobconf <key>=<value>
+```
+例如:
+```
+-jobconf mapreduce.job.queue.name=xxx -jobconf mapreduce.job.name=xxx
+```
