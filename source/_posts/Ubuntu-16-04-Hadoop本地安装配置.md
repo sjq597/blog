@@ -1,22 +1,16 @@
-title: Ubuntu 16.04 Hive本地安装配置
+title: Ubuntu 16.04 Hadoop本地安装配置
 date: 2016-07-19 13:18:47
-tags: [Linux,Hive,Hadoop,大数据]
+tags: [Linux,Hadoop,大数据]
 categories: 开发环境
 ---
-线上集群测试太慢，有时候需要在本地跑一些计算或者测试某个逻辑，主要做调试用，所以在本地也装一个Hive测试用
+线上集群测试太慢，有时候需要在本地跑一些计算或者测试某个逻辑，主要做调试用，所以在本地也装一个Hive测试用,但是装Hive需要先安装Hadoop.
 
 ### 准备工作
 开发环境为:
 ```
 OS: Ubuntu 16.04 LTS 64bit
-MySQL: 5.7.12
 JDK: 1.7.0_40
 Hadoop:hadoop-2.6.4.tar.gz
-Hive:apache-hive-2.1.0-bin.tar.gz
-```
-简单的介绍一下安装之前需要做的一些准备工作,安装MySQL比较简单:
-```
-➜  sudo apt install mysql-server -y
 ```
 
 ### 安装步骤
@@ -37,7 +31,7 @@ Hive:apache-hive-2.1.0-bin.tar.gz
 ```
 
 #### ssh登陆配置
-然后点右上角的切换用户登陆，以hadoop用户登陆之后,安装hadoop:
+然后点右上角的切换用户登陆，以hadoop用户登陆之后，执行下面的语句:
 ```
 ➜  sudo apt update
 ➜  sudo apt install openssh-server -y
@@ -72,7 +66,11 @@ N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细�
 ➜  sh-keygen -t rsa
 ➜  cat id_rsa.pub >> authorized_keys
 ```
-**注意:**生成密钥的时候一路回车，不要输入任何东西
+**注意:**生成密钥的时候一路回车，不要输入任何东西,如果进行到这一步，我们就可以切回原来的系统了，然后使用:
+```
+ssh hadoop@localhost
+```
+因为Linux本来就是一个支持多用户登陆的操作系统，配置好`ssh serveer`之后就可以完全在我们平时用的系统里通过`ssh`以`hadoop`用户登陆进行操作，下面的操作都是以`hadoop`用户登陆进行的操作。
 
 #### 安装JDK
 由于原来的用户已经装过了，这里只需要把之前用的的`JDK`路径设置一下就行了，编辑`~/.bashrc`文件:
