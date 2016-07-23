@@ -106,7 +106,7 @@ Exception in thread "main" java.lang.RuntimeException: org.apache.hadoop.hive.ql
 Caused by: org.apache.hadoop.hive.ql.metadata.HiveException: org.apache.hadoop.hive.ql.metadata.HiveException: MetaException(message:Hive metastore database is not initialized. Please use schematool (e.g. ./schematool -initSchema -dbType ...) to create the schema. If needed, don't forget to include the option to auto-create the underlying database in your JDBC connection string (e.g. ?createDatabaseIfNotExist=true for mysql))
 	at org.apache.hadoop.hive.ql.metadata.Hive.registerAllFunctionsOnce(Hive.java:226)
 ```
-启动不了,看错误信息里面有提示，就照着搞一下。
+启动不了,看错误信息里面有提示，好像是元数据库没有初始化，就照着搞一下。
 ```
 ./bin/schematool -initSchema -dbType mysql
 SLF4J: Class path contains multiple SLF4J bindings.
@@ -230,4 +230,4 @@ TBLPROPERTIES (
   'transient_lastDdlTime'='1469260899')
 Time taken: 0.156 seconds, Fetched: 23 row(s)
 ```
-有个问题哈，中文注释乱码了，怎么解决呢？网上又相关的教程，需要修改源码，重新编译`hive-exec-2.1.0.jar`这个包，暂时能用了，本机基本上是测试用，中文乱码也不影响使用，有空再研究怎么去乱码。
+这里可以看到有个问题，中文注释乱码了，怎么解决呢？网上有相关的教程，需要修改源码，重新编译`hive-exec-2.1.0.jar`这个包，暂时能用了，本机基本上是测试用，中文乱码也不影响使用，有空再研究怎么去乱码。

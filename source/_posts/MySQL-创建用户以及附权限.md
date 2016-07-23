@@ -33,6 +33,6 @@ mysql>grant select,insert,update,delete,create,drop on order.oerder_info to 6Fy9
 这里还有个快捷的操作，如果要附所有表的的所有操作权限，不可能一个一个去写，命令如下:
 ```
 mysql>grant all privileges on order.oerder_info to 6Fy9BTnB@192.168.1.101 identified by 'Ruw50OR1oiUCwP73abnlD0';
-
+```
 
 
