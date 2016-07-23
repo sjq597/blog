@@ -16,9 +16,10 @@ Hive:
 
 ### 安装步骤
 首先你需要安装配置好`Jdk`,`Hadoop`,`MySQL`这三个东西，前面两个可以参见上一篇笔记[Ubuntu 16 04 Hadoop本地安装配置](../../19/Ubuntu-16-04-Hadoop本地安装配置)
-**注意:**本篇所有的安装软件都安装在`Hadoop`用户下，请务必注意.具体的可以使用``ssh hadoop@localhost`登陆，然后在终端中操作.
+**注意:**本篇Hive是安装在`Hadoop`用户下，请务必注意.具体的可以使用`ssh hadoop@localhost`登陆，然后在终端中操作.
 
 #### 安装MySQL
+MySQL随便安装在哪个用户下都行，反正可以连上就行:
 ```
 sudo apt install -y mysql-server
 ```
@@ -34,7 +35,7 @@ grant all privileges on *.* to 'hive'@'localhost' identified by 'hive';
 **注意:**第一个`hive`是创建的用户名为`hive`,`identified by`后面的那个`hive`是密码。
 然后用刚创建的用户登陆,并创建数据库:
 ```
-mysql -uroot -proot
+mysql -uhive -phive
 mysql> create database hive;
 ```
 
