@@ -231,6 +231,10 @@ Found 8 items
 查看hdfs文件的统计结果可以使用:
 ```
 ➜  ./bin/hdfs dfs -cat output/*
+1	dfsadmin
+1	dfs.replication
+1	dfs.namenode.name.dir
+1	dfs.datanode.data.dir
 ```
 结果也可以取回本地，当然记得先把本地的文件夹删了:
 ```
