@@ -10,34 +10,25 @@ categories: 开发环境
 ```
 OS: Ubuntu 16.04 LTS 64bit
 JDK: 1.7.0_40
+ssh server:1:7.2p2-4ubuntu1
 Hadoop:hadoop-2.6.4.tar.gz
+➜  Blog git:(master) ✗ whoami 
+anonymous
 ```
+**注意:**当前用户为`anonymous`,下面所有涉及到用户的地方，需要对应修改为你自己的用户名。
 
 ### 安装步骤
 具体的安装步骤可能有些多，具体过程如下:
 
-#### 创建Hadoop用户
-为了使用方便，和日常使用分开来，我们创建一个专属用户:
-```
-➜  sudo useradd -m hadoop -s /bin/bash
-➜  sudo passwd hadoop
-➜  sudo adduser hadoop sudo
-```
-上面的命令就是创建了一个新用户，并且设置新用户的密码，连输两次，简单起见密码就设置为`hadoop`,然后把`hadoop`用户加到管理员组。
-如果想删除这个用户可以这样:
-```
-➜  sudo userdel hadoop	# 删除用户
-➜  sudo rm -rf /home/hadoop	# 删除用户目录
-```
-
 #### ssh登陆配置
-然后点右上角的切换用户登陆，以hadoop用户登陆之后，执行下面的语句:
+先安装ssh server程序:
 ```
 ➜  sudo apt update
 ➜  sudo apt install openssh-server -y
 ➜  ssh localhost
 ```
-输入密码之后可以登陆则没有问题，然后使用`exit`命令注销当前用户,如果第一步报错:
+输入密码之后可以登陆则没有问题，然后使用`exit`命令注销当前用户,直接忽略下面的异常问题，
+如果第一步出现下面的错误，按照下面的方法解决即可:
 ```
 忽略:1 http://dl.google.com/linux/chrome/deb stable InRelease
 获取:2 http://archive.ubuntukylin.com:10006/ubuntukylin xenial InRelease [3,192 B]
@@ -68,13 +59,15 @@ N: 参见 apt-secure(8) 手册以了解仓库创建和用户配置方面的细�
 ```
 **注意:**生成密钥的时候一路回车，不要输入任何东西,如果进行到这一步，我们就可以切回原来的系统了，然后使用:
 ```
-ssh hadoop@localhost
+ssh localhost
 ```
-因为Linux本来就是一个支持多用户登陆的操作系统，配置好`ssh serveer`之后就可以完全在我们平时用的系统里通过`ssh`以`hadoop`用户登陆进行操作.
-**注意:**下面的操作都是以`hadoop`用户登陆进行的操作。
 
 #### 安装JDK
-由于原来的用户已经装过了，这里只需要把之前用的的`JDK`路径设置一下就行了，编辑`~/.bashrc`文件:
+这个安装也很简单，解压然后配置环境变量即可:
+```
+sudo tar -xvf jdk-7u40-linux-x64.tar.gz -C /usr/dev
+```
+然后编辑`~/.bashrc`文件:
 ```
 export JAVA_HOME=/usr/dev/jdk1.7.0_40
 export JRE_HOME=${JAVA_HOME}/jre
@@ -97,7 +90,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 24.0-b56, mixed mode)
 确认JDK安装正确之后，下面就可以来安装Hadoop了,进入到压缩包所在目录:
 ```
 ➜  sudo tar -xvf hadoop-2.6.4.tar.gz -C /usr/dev/
-➜  sudo chown -R hadoop /usr/dev/hadoop-2.6.4/
+➜  sudo chown -R anonymous /usr/dev/hadoop-2.6.4/
 ```
 看看是否正确安装了:
 ```
@@ -111,6 +104,11 @@ From source with checksum 8dee2286ecdbbbc930a6c87b65cbc010
 This command was run using /usr/dev/hadoop-2.6.4/share/hadoop/common/hadoop-common-2.6.4.jar
 ```
 可以识别到版本就说明没啥问题了。
+为了方便以后使用，可以再配置一下环境变量:
+```
+export HADOOP_HOME=/usr/dev/hadoop-2.6.4
+export PATH=${HADOOP_HOME}/bin:$PATH
+```
 **注意:**后面的操作如果没有特殊指明，都是在hadoop的安装目录`/usr/dev/hadoop-2.6.4`下进行的操作
 
 ### 单机配置
@@ -171,7 +169,7 @@ This command was run using /usr/dev/hadoop-2.6.4/share/hadoop/common/hadoop-comm
 16/07/19 16:23:54 INFO util.ExitUtil: Exiting with status 0
 16/07/19 16:23:54 INFO namenode.NameNode: SHUTDOWN_MSG:
 /************************************************************
-SHUTDOWN_MSG: Shutting down NameNode at junqiang.shen/127.0.1.1
+SHUTDOWN_MSG: Shutting down NameNode at anonymous/127.0.1.1
 ************************************************************/
 ```
 **注意:**如果消息最后不是`been successfully formatted.`以及返回值不是`Exiting with status 0`则说明执行失败。
@@ -189,14 +187,14 @@ Starting secondary namenodes [0.0.0.0]
 ```
 export JAVA_HOME=/usr/dev/jdk1.7.0_40
 ```
-然后再试一下:
+记得要`source ~/.bashrc`,然后再试一下:
 ```
 ➜  ./sbin/start-dfs.sh
 Starting namenodes on [localhost]
-localhost: starting namenode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-namenode-junqiang.out
-localhost: starting datanode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-datanode-junqiang.out
+localhost: starting namenode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-namenode-anonymous.out
+localhost: starting datanode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-datanode-anonymous.out
 Starting secondary namenodes [0.0.0.0]
-0.0.0.0: starting secondarynamenode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-secondarynamenode-junqiang.out
+0.0.0.0: starting secondarynamenode, logging to /usr/dev/hadoop-2.6.4/logs/hadoop-hadoop-secondarynamenode-anonymous.out
 ```
 看看进程:
 ```
@@ -216,14 +214,14 @@ Starting secondary namenodes [0.0.0.0]
 ➜  ./bin/hdfs dfs -put etc/hadoop/*.xml input/
 ➜  ./bin/hdfs dfs -ls input/
 Found 8 items
--rw-r--r--   1 hadoop supergroup       4436 2016-07-19 19:37 input/capacity-scheduler.xml
--rw-r--r--   1 hadoop supergroup       1051 2016-07-19 19:37 input/core-site.xml
--rw-r--r--   1 hadoop supergroup       9683 2016-07-19 19:37 input/hadoop-policy.xml
--rw-r--r--   1 hadoop supergroup       1105 2016-07-19 19:37 input/hdfs-site.xml
--rw-r--r--   1 hadoop supergroup        620 2016-07-19 19:37 input/httpfs-site.xml
--rw-r--r--   1 hadoop supergroup       3523 2016-07-19 19:37 input/kms-acls.xml
--rw-r--r--   1 hadoop supergroup       5511 2016-07-19 19:37 input/kms-site.xml
--rw-r--r--   1 hadoop supergroup        690 2016-07-19 19:37 input/yarn-site.xml
+-rw-r--r--   1 anonymous supergroup       4436 2016-07-19 19:37 input/capacity-scheduler.xml
+-rw-r--r--   1 anonymous supergroup       1051 2016-07-19 19:37 input/core-site.xml
+-rw-r--r--   1 anonymous supergroup       9683 2016-07-19 19:37 input/hadoop-policy.xml
+-rw-r--r--   1 anonymous supergroup       1105 2016-07-19 19:37 input/hdfs-site.xml
+-rw-r--r--   1 anonymous supergroup        620 2016-07-19 19:37 input/httpfs-site.xml
+-rw-r--r--   1 anonymous supergroup       3523 2016-07-19 19:37 input/kms-acls.xml
+-rw-r--r--   1 anonymous supergroup       5511 2016-07-19 19:37 input/kms-site.xml
+-rw-r--r--   1 anonymous supergroup        690 2016-07-19 19:37 input/yarn-site.xml
 
 ➜  ./bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.4.jar grep input/ output 'dfs[a-z.]+'
 ```

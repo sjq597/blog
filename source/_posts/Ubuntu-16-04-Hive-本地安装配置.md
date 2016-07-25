@@ -11,15 +11,16 @@ OS: Ubuntu 16.04 LTS 64bit
 JDK: 1.7.0_40
 Hadoop:hadoop-2.6.4.tar.gz
 MySQL: 5.7.13
-Hive:
+Hive: hive-2.1.0
+➜  Blog git:(master) ✗ whoami 
+anonymous
 ```
 
 ### 安装步骤
 首先你需要安装配置好`Jdk`,`Hadoop`,`MySQL`这三个东西，前面两个可以参见上一篇笔记[Ubuntu 16 04 Hadoop本地安装配置](../../19/Ubuntu-16-04-Hadoop本地安装配置)
-**注意:**本篇Hive是安装在`Hadoop`用户下，请务必注意.具体的可以使用`ssh hadoop@localhost`登陆，然后在终端中操作.
 
 #### 安装MySQL
-MySQL随便安装在哪个用户下都行，反正可以连上就行:
+MySQL安装比较简单:
 ```
 sudo apt install -y mysql-server
 ```
@@ -43,22 +44,22 @@ mysql> create database hive;
 去Apache官网下载就行[Hive官网地址](https://hive.apache.org/),我这里下载的是最新的版本`apache-hive-2.1.0-bin.tar.gz`:
 ```
 sudo tar -xvf apache-hive-2.1.0-bin.tar.gz -C /usr/dev/
-sudo chown -R hadoop /usr/dev/apache-hive-2.1.0-bin/
+sudo chown -R anonymous /usr/dev/apache-hive-2.1.0-bin/
 ```
 然后需要配置Hive,一下操作默认都是在`/usr/dev/apache-hive-2.1.0-bin`目录中操作的.
 ```
-cp conf/hive-default.xml.template hive-site.xml
+cp conf/hive-default.xml.template conf/hive-site.xml
 ```
 然后修改`hive-site.xml`文件中对应位置的内容，根据实际情况修改，比如数据库的名字，用户名，密码等，我的配置如下:
 ```
 <property>
   <name>hive.metastore.warehouse.dir</name>
-  <value>/home/hadoop/hive/warehouse</value>
+  <value>/usr/dev/apache-hive-2.1.0-bin/warehouse</value>
   <description>location of default database for the warehouse</description>
 </property>
 <property>
   <name>javax.jdo.option.ConnectionURL</name>
-  <value>jdbc:mysql://localhost:3306/hive?characterEncoding=UTF-8&createDatabaseIfNotExist=true</value>
+  <value>jdbc:mysql://localhost:3306/hive?characterEncoding=UTF-8&amp;createDatabaseIfNotExist=true</value>
   <description>
     JDBC connect string for a JDBC metastore.
     To use SSL to encrypt/authenticate the connection, provide database-specific SSL flag in the connection URL.
@@ -138,16 +139,16 @@ Exception in thread "main" java.lang.IllegalArgumentException: java.net.URISynta
 	at org.apache.hadoop.fs.Path.<init>(Path.java:172)
 .......
 ```
-尼玛，还是不行，继续排查,同样，看错误信息貌似是配置文件里面的`${system:java.io.tmpdir`这个出问题了，解决方法:替换掉`conf/hive-site.xml`里面的所有的`${system:java.io.tmpdir}`为固定值，比如我设置的就是`/home/hadoop/tmp`,只列出两个，有好几处，都得替换掉:
+尼玛，还是不行，继续排查,同样，看错误信息貌似是配置文件里面的`${system:java.io.tmpdir`这个出问题了，解决方法:替换掉`conf/hive-site.xml`里面的所有的`${system:java.io.tmpdir}`为固定值，比如我设置的就是`/usr/dev/apache-hive-2.1.0-bin/tmp`,只列出两个，有好几处，都得替换掉:
 ```
 <property>
     <name>hive.exec.local.scratchdir</name>
-    <value>/home/hadoop/tmp/${system:user.name}</value>
+    <value>/usr/dev/apache-hive-2.1.0-bin/tmp/${system:user.name}</value>
     <description>Local scratch space for Hive jobs</description>
   </property>
   <property>
     <name>hive.downloaded.resources.dir</name>
-    <value>/home/hadoop/tmp/${hive.session.id}_resources</value>
+    <value>/usr/dev/apache-hive-2.1.0-bin/tmp/${hive.session.id}_resources</value>
     <description>Temporary local directory for added resources in the remote file system.</description>
   </property>
 ```
@@ -179,8 +180,7 @@ Time taken: 0.981 seconds
 hive> show databases;
 OK
 default
-Time taken: 0.024 seconds, Fetched: 1 row(s)
-hive> 
+
 ```
 到此终于搞定了。试下创建一张表：
 ```
@@ -221,7 +221,7 @@ STORED AS INPUTFORMAT
 OUTPUTFORMAT 
   'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
 LOCATION
-  'hdfs://localhost:9000/home/hadoop/hive/warehouse/dw_subject.db/table_test'
+  'hdfs://localhost:9000/user/anonymous/warehouse/dw_subject.db/table_test'
 TBLPROPERTIES (
   'COLUMN_STATS_ACCURATE'='{\"BASIC_STATS\":\"true\"}', 
   'numFiles'='0', 
