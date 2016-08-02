@@ -232,3 +232,34 @@ TBLPROPERTIES (
 Time taken: 0.156 seconds, Fetched: 23 row(s)
 ```
 这里可以看到有个问题，中文注释乱码了，怎么解决呢？网上有相关的教程，需要修改源码，重新编译`hive-exec-2.1.0.jar`这个包，暂时能用了，本机基本上是测试用，中文乱码也不影响使用，有空再研究怎么去乱码。
+
+### Hive中文乱码
+乱码的问题网上也都一大片，可能每个人的问题还不一样，以我的为例,我的问题还不是乱码，是`?`，所有的中文都显示成`?`了。联系到有时候用`MySQL`没指定编码也会出现问题，我查看了一下hive的元数据表:
+```
+| COLUMNS_V2 | CREATE TABLE `COLUMNS_V2` (
+  `CD_ID` bigint(20) NOT NULL,
+  `COMMENT` varchar(256) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+  `COLUMN_NAME` varchar(767) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
+  `TYPE_NAME` varchar(4000) DEFAULT NULL,
+  `INTEGER_IDX` int(11) NOT NULL,
+  PRIMARY KEY (`CD_ID`,`COLUMN_NAME`),
+  KEY `COLUMNS_V2_N49` (`CD_ID`),
+  CONSTRAINT `COLUMNS_V2_FK1` FOREIGN KEY (`CD_ID`) REFERENCES `CDS` (`CD_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
+```
+可能老版本的是叫`COLUMNS`,这个差不多，视版本而定,可以看到存注释的字段确实不是用的`utf8`编码:
+```
+COMMENT varchar(256) CHARACTER SET latin1 COLLATE latin1_bin DEFAULT NULL,
+```
+然后重启`hive`客户端，然后执行`desc`命令，发现还是问号，于是把表删了，然后把建表语句重新执行之后，再执行`desc`命令，果然好了:
+```
+ve> desc test.window_analysis;
+OK
+user_id             	bigint              	用户id                
+reg_time            	timestamp           	注册时间                
+Time taken: 0.091 seconds, Fetched: 2 row(s)
+```
+但是`show create table xxx`语句的还是乱码。
+
+### 解决show create table乱码
+首先要去官网下载源码自己编译[Hive源码](http://mirrors.cnnic.cn/apache/hive/),
