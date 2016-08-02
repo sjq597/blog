@@ -1,0 +1,27 @@
+http://www.pythondoc.com/exploreflask/storing.html
+
+http://docs.sqlalchemy.org/en/latest/core/engines.html?highlight=database#database-urls
+
+dialect+driver://username:password@host:port/database
+
+MySQL
+# default
+engine = create_engine('mysql://scott:tiger@localhost/foo')
+
+# mysql-python
+engine = create_engine('mysql+mysqldb://scott:tiger@localhost/foo')
+
+# MySQL-connector-python
+engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
+
+# OurSQL
+engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
+
+SQLite
+# sqlite://<nohostname>/<path>
+# where <path> is relative:
+engine = create_engine('sqlite:///foo.db')
+
+Flask==0.11.1
+SQLAlchemy==1.0.14
+Flask-SQLAlchemy==2.1
