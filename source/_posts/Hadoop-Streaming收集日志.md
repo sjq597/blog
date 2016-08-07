@@ -76,3 +76,10 @@ sudo -u${HADOOP_USER} ${HADOOP_HOME}/bin/hadoop fs -rm -r output_dir
 ```
 -jobconf mapreduce.job.queue.name=xxx -jobconf mapreduce.job.name=xxx
 ```
+
+### 常用操作
+对于日志这种，其实是多路输入，合并到一路输出，中间只是把一行内容变成一行内容，用特定字符分隔开来而已，所以并没有`reduce`过程，如果我们用了上面那个参数，最后会又有一个`reducer`，特别慢，关键是有可能内存不够，所以可以取消掉
+```
+-jobconf mapred.reduce.tasks=0
+```
+这样就不会有`reducer`了，会快很多。
