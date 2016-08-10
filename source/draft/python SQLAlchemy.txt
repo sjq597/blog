@@ -1,27 +1,26 @@
-http://www.pythondoc.com/exploreflask/storing.html
+http://www.pythondoc.com/flask-sqlalchemy/models.html
+https://segmentfault.com/a/1190000004618621
 
-http://docs.sqlalchemy.org/en/latest/core/engines.html?highlight=database#database-urls
+relationship() 申明的字段不会作为真正的数据库字段属性
 
-dialect+driver://username:password@host:port/database
 
-MySQL
-# default
-engine = create_engine('mysql://scott:tiger@localhost/foo')
+class Person(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    addresses = db.relationship('Address', backref='person',
+                                lazy='dynamic')
 
-# mysql-python
-engine = create_engine('mysql+mysqldb://scott:tiger@localhost/foo')
+class Address(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(50))
+    person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
 
-# MySQL-connector-python
-engine = create_engine('mysql+mysqlconnector://scott:tiger@localhost/foo')
+Person实体中并没有address这个字段，需要在Address中申明一下关联规则
+person_id = db.Column(db.Integer, db.ForeignKey('person.id'))
 
-# OurSQL
-engine = create_engine('mysql+oursql://scott:tiger@localhost/foo')
+db.relationship('Address', backref='person',lazy='dynamic')
+为Address增加一个属性，可以通过address反查使用了这个地址的人，lazy='dynamic'表明查询并不是单纯的返回
+所有数据，而是返回一个查询对象，可以过滤掉不必要的数据
 
-SQLite
-# sqlite://<nohostname>/<path>
-# where <path> is relative:
-engine = create_engine('sqlite:///foo.db')
+backref=db.backref 这个属性就是说的在通过person查询所有的地址的时候，有多个地址也是类似的使用这种方法
 
-Flask==0.11.1
-SQLAlchemy==1.0.14
-Flask-SQLAlchemy==2.1
