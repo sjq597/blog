@@ -34,6 +34,8 @@ ImportError: cannot import name db
 
 9 directories, 15 files
 ```
+代码如下:
+```
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from web.security.views import security
