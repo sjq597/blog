@@ -50,3 +50,11 @@ mathjax: false      #enable mathjax if true
 里的`mathjax`对应的值改为`true`就可以了,测试一下:
 $$E=MC^2$$
 公式写法参见[MathJax使用LaTeX语法编写数学公式教程](http://iori.sinaapp.com/17.html/comment-page-1?replytocom=2)
+
+### Hexo常见为题
+
+* Error: watch ENOSPC
+
+```
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+```
