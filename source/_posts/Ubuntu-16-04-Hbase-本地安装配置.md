@@ -88,3 +88,60 @@ HBASE_MANAGE_XK=true
     <value>hdfs://localhost:9000</value>
 </property>
 ```
+然后再次启动hbase,出现如下报错情况:
+```
+localhost: +======================================================================+
+localhost: |                    Error: JAVA_HOME is not set                       |
+localhost: +----------------------------------------------------------------------+
+localhost: | Please download the latest Sun JDK from the Sun Java web site        |
+localhost: |     > http://www.oracle.com/technetwork/java/javase/downloads        |
+localhost: |                                                                      |
+localhost: | HBase requires Java 1.7 or later.                                    |
+localhost: +======================================================================+
+starting master, logging to /usr/dev/hbase-1.2.3/bin/../logs/hbase-anonymous-master-anonymous.out
+starting regionserver, logging to /usr/dev/hbase-1.2.3/bin/../logs/hbase-anonymous-1-regionserver-anonymous.out
+```
+出现这个问题一般是配置的问题，可以直接在环境变量文件里面强制配置一下，编辑`conf/hbase-env.sh`文件，把原来的注释解解掉，改成下面这样:
+```
+export JAVA_HOME=/usr/dev/jdk1.7.0_40
+```
+然后记得得先把本机的hadoop伪分布式集群启动:
+```
+cd /usr/dev/hadoop-2.6.4
+./sbin/start-dfs.sh
+./sbin/start-yarn.sh
+./sbin/mr-jobhistory-daemon.sh start historyserver
+```
+然后才能启动hbase
+```
+cd /usr/dev/hbase-1.2.3
+./bin/start-hbase.sh
+```
+查看一下是否启动成功:
+```
+➜  hbase-1.2.3 jps
+26874 HRegionServer
+24854 SecondaryNameNode
+26087 HQuorumPeer
+25125 NodeManager
+24529 NameNode
+26160 HMaster
+24671 DataNode
+2738 Main
+25312 JobHistoryServer
+25008 ResourceManager
+27040 Jps
+```
+看到如果有HMaster以及HRegionServer说明启动成功.
+**注:**如果又类似这种提示:
+```
+regionserver running as process 23997. Stop it first.
+```
+可以直接先kill掉:
+```
+sudo kill -9 23997
+```
+启动成功之后也会看到hdfs目录:
+```
+hdfs dfs -ls /hbase
+```
