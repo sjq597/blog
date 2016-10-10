@@ -81,7 +81,7 @@ HBASE_MANAGE_XK=true
   </property>
 </configuration>
 ```
-**注:**上面的`hbase.rootdir`配置要和`/usr/dev/hadoop-2.6.4/etc/hadoop/core-site.xml`一致:
+**注:**上面的`hbase.rootdir`配置的hdfs路径以及端口要和`/usr/dev/hadoop-2.6.4/etc/hadoop/core-site.xml`一致:
 ```
 <property>
     <name>fs.defaultFS</name>
