@@ -15,7 +15,7 @@ anonymous
 ```
 
 ### 安装步骤
-首先去官网[Kylin下载地址](http://apache.fayea.com/hbase/stable/)，可以下载编译好的`hbase-1.2.3-bin.tar.gz`,也可以下载源码自己编译，我下载源码版`hbase-1.2.3-src.tar.gz`自己编译的,其他的应该都一样,下载之后解压编译:
+首先去官网[Hbase下载地址](http://apache.fayea.com/hbase/stable/)，可以下载编译好的`hbase-1.2.3-bin.tar.gz`,也可以下载源码自己编译，我下载源码版`hbase-1.2.3-src.tar.gz`自己编译的,其他的应该都一样,下载之后解压编译:
 ```
 tar -xvf hbase-1.2.3-src.tar.gz -C /usr/dev
 cd /user/dev/hbase-1.2.3
