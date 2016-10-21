@@ -1,0 +1,1 @@
+https://datatables.net/examples/advanced_init/column_render.html
