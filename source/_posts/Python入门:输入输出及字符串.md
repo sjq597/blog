@@ -198,3 +198,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 2
 >>> 
 ```
+
+最常见的还不是编码带来的长度问题不一致，编码主要会导致一些系统异常，常见的有两种:
+* encode(编码)异常
+
+常见的就是`UnicodeEncodeError: 'ascii' codec can't encode character u'xxxx' in position xx: ordinal not in range(128)`,
+意思就是把一个字符串编码为str的时候，系统默认是编码成`ascii`编码格式，但是中文里面的编码超出了`ascii`编码的最大范围，直接
+报错，常见的就是直接掉`str()`函数的时候没有指定编码。建议少用`str()`函数，采用`xxx.encode('utf8')`这种显示的声明
+
+* decode(解码)异常
+
+道理是一样的，默认也是用`ascii`解码，如果是中文的话，需要手动指定`uft-8`解码方式.
+
