@@ -1,1 +1,4 @@
 locate centos 查找文件位置
+
+transmission
+service transmission-daemon start
