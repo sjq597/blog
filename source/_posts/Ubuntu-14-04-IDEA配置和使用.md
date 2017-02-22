@@ -18,4 +18,21 @@ cd /usr/dev/idea-IU-139.1117.1/bin
 /usr/dev/idea-IU-139.1117.1/bin/idea.sh &
 ```
 然后对脚本赋可执行权限
-```bash
+
+### 常用配置
+必装插件:
+```
+Eclipse Code Formatter
+Lombok plugin
+Vim Emulation
+```
+激活服务器搭建:http://blog.lanyus.com/archives/174.html
+
+### 无法切换中文输入法
+修改启动脚本`/usr/dev/idea-IU-139.1117.1/bin/idea.sh`,头部加入下面几行:
+```
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+```
+前提是你用的是`fcitx`架构的输入法.

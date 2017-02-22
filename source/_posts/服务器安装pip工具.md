@@ -52,3 +52,17 @@ trusted-host=mirrors.aliyun.com
 index-url=http://mirrors.aliyun.com/pypi/simple/
 ```
 对应的如果是Windows,则需要在对应用户目录下修改，例如`C:\Users\zhangsan\pip\pip.ini`，内容如上。
+
+指定url安装包可以这样, 以`Flask`为例:
+```
+pip install -i http://mirrors.aliyun.com/pypi/simple/ Flask
+```
+
+项目依赖打包以及环境快速恢复:
+```
+# 依赖导出
+pip freeze > requirements.txt
+
+# 安装文件中所有依赖
+pip install -r requirements.txt
+```
