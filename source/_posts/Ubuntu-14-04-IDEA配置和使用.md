@@ -36,3 +36,9 @@ export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 ```
 前提是你用的是`fcitx`架构的输入法.
+
+### 序列化ID警告
+I am not sure if you have an old version of IntelliJ but If I go File => Settings... => Inspections => Serialization issues =>  Serializable class without 'serialVersionUID' enabled, the class you provide give me warnings
+
+### 文件头模板d定制
+文件上右击--New--Edit File Templates--Includes--File Header
