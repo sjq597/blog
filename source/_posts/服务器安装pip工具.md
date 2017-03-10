@@ -35,6 +35,17 @@ SystemError: Cannot compile 'Python.h'. Perhaps you need to install python-dev|p
 ```
 sudo yum install python-devel
 ```
+**备注:**如果是Ubuntu安装报错`mysql_config`:
+```
+    libs = mysql_config("libs_r")
+  File "/tmp/pip-build-a7IbwK/MySQL-python/setup_posix.py", line 25, in mysql_config
+    raise EnvironmentError("%s not found" % (mysql_config.path,))
+EnvironmentError: mysql_config not found
+```
+解决方案为:
+```
+sudo apt-get install libmysqlclient-dev
+```
 
 还需要升级python2.6.6至2.7.x
 查看python2.7安装位置，假设在`/usr/bin/q-python2.7`,建立软连接
