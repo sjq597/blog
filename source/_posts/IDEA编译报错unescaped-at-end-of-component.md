@@ -14,6 +14,7 @@ categories: Java笔记
 每一个Spring工程必须在Idea里面配置正确，不然有些路径的文件或者包可能读取不到，具体的看`Project Structure`里面的配置,可以找个正确的项目可以运行的参考参考,需要注意的地方是:
 ```
 Modules: 这个地方的模块名和一些Source Roots还有web resource directories`看看设置的有没有问题，还有Spring的配置，主要是路径
+```
 
 * 打包问题
 
@@ -23,5 +24,5 @@ Modules: 这个地方的模块名和一些Source Roots还有web resource directo
 需要把这个包拷贝到tomcat服务器上，然后解压
 # exploded
 不需要拷贝解压，tomcat会直接读取我们项目的target里面的classes文件，做到调试可更新
-
+```
 
