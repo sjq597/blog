@@ -32,3 +32,56 @@ git revert -m <用1或2指定需要保留的主线> <需要撤销的合并的sha
 ```
 git revert <merge操作的版本号>
 ```
+
+### Git仓库无权限
+这个问题会经常出现，就算是很多用了好几年的程序员，有时候在出现这个问题的时候也不知道怎么解决，一般也就是去网上查一下，然后照着帖子里面弄一下，如果可以了，就再也不管了，如果不行，就接着找，试下一个方法，反正就这么一直试，试到后面总会莫名奇妙的解决了。如果实在不行可能就放大招重装系统或者git了。其实出现这个问题的根本原因就是ssh私钥和公钥的问题，要么是找不到，要么是找到了文件的权限不对.所以在出现这个问题的时候就知道怎么解决了.
+首先得说明一下下面的两个命令的区别:
+```
+sudo git pull	// 读取的配置文件为/root/.ssh/id_rsa
+git pull	// 读取的配置文件为~/.ssh/id_rsa
+```
+可以试一下有什么区别:
+
+* ssh -vT git@gitlab.corp.xxx.com
+
+```
+debug1: identity file /home/anonymous/.ssh/id_rsa type 1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_rsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_dsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_dsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_ecdsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_ecdsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_ed25519 type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /home/anonymous/.ssh/id_ed25519-cert type -1
+```
+
+* sudo ssh -vT git@gitlab.corp.xxx.com
+
+```
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_rsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_rsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_dsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_dsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_ecdsa type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_ecdsa-cert type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_ed25519 type -1
+debug1: key_load_public: No such file or directory
+debug1: identity file /root/.ssh/id_ed25519-cert type -1
+debug1: Enabling compatibility mode for protocol 2.0
+```
+不同权限加载的文件是不一样的，所以为了知道问题出在哪，首先你得知道在和git仓库同步代码的时候加载的是哪个地方的秘钥文件.
+知道了加载哪个地方的文件之后，还有一个很重要的问题需要知道,秘钥文件的权限必须是``600`,很多时候可能关键的问题还是因为秘钥文件的权限不对
