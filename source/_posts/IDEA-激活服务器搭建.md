@@ -19,3 +19,13 @@ chmod +x IntelliJIDEALicenseServer_linux_amd64
 ```
 http://<your_vps_id>:1017
 ```
+
+有了这个还不够,有时候vps访问并不是那么流畅，或者没联网，这可能会影响我们的idea启动速度,所以可以把激活服务器搭建在本机，然后设置开机启动即可,假设你的文件放在`/workspace/dev/IntelliJIDEALicenseServer_linux_amd64`,那么可以修改`/etc/rc.local`,添加:
+```
+sudo /workspace/dev/IntelliJIDEALicenseServer_linux_amd64 &
+```
+然后激活服务器可以填:
+```
+http://127.0.0.1:1017
+```
+然后就可以每次不用管是不是联网了。
