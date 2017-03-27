@@ -1,0 +1,1 @@
+http://stackoverflow.com/questions/22102697/spring-mvc-bad-request-with-requestbody
