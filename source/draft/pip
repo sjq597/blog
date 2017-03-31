@@ -1,0 +1,32 @@
+The pip==7.1.0' distribution was not found and is required by the application
+
+easy_install pip
+
+[root@littleq ~]# easy_install pip
+Searching for pip
+Best match: pip 9.0.1
+Adding pip 9.0.1 to easy-install.pth file
+Installing pip script to /usr/local/python2.7/bin
+Installing pip3.5 script to /usr/local/python2.7/bin
+Installing pip3 script to /usr/local/python2.7/bin
+
+Using /usr/local/python2.7/lib/python2.7/site-packages
+Processing dependencies for pip
+Finished processing dependencies for pip
+
+[root@littleq ~]# which pip
+/usr/bin/pip
+[root@littleq ~]# vi /usr/bin/pip
+
+
+#!/usr/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'pip==7.1.0','console_scripts','pip'
+__requires__ = 'pip==9.0.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('pip==9.0.1', 'console_scripts', 'pip')()
+    )
+

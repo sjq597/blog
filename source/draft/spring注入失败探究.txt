@@ -1,0 +1,16 @@
+Spring Issues: Error creating beans and Injection of autowired dependencies failed
+
+导致的原因是加了事务注解
+<tx:annotation-driven  transaction-manager="transactionManager" />
+
+@Resource
+@Autowried
+区别
+
+@Service("serviceName")
+@Resource(name = "serviceName")
+
+报错
+but was actually of type [com.sun.proxy.$Proxy17
+
+http://stackoverflow.com/questions/841231/fixing-beannotofrequiredtypeexception-on-spring-proxy-cast-on-a-non-singleton-be
