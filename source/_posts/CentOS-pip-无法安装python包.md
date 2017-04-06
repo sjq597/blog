@@ -29,3 +29,42 @@ The repository located at pypi.corp.qunar.com is not a trusted or secure host an
 sudo pip install --trusted-host pypi.abc.def.com --upgrade sqlalchemy
 ```
 然后就安装成功了。
+
+有时候升级pip会报这个错:
+```
+The pip==7.1.0' distribution was not found and is required by the application
+```
+详细解决方案如下:
+```
+[root@xxx ~]# easy_install pip
+Searching for pip
+Best match: pip 9.0.1
+Adding pip 9.0.1 to easy-install.pth file
+Installing pip script to /usr/local/python2.7/bin
+Installing pip3.5 script to /usr/local/python2.7/bin
+Installing pip3 script to /usr/local/python2.7/bin
+
+Using /usr/local/python2.7/lib/python2.7/site-packages
+Processing dependencies for pip
+Finished processing dependencies for pip
+```
+然后看看系统的pip是哪个地方:
+```
+[root@xxx ~]# which pip
+/usr/bin/pip
+```
+然后我们需要编辑一下这个文件`vi /usr/bin/pip`:
+```
+#!/usr/bin/python
+# EASY-INSTALL-ENTRY-SCRIPT: 'pip==7.1.0','console_scripts','pip'
+__requires__ = 'pip==9.0.1'
+import sys
+from pkg_resources import load_entry_point
+
+if __name__ == '__main__':
+    sys.exit(
+        load_entry_point('pip==9.0.1', 'console_scripts', 'pip')()
+    )
+
+```
+就是把pip改成你系统安装的pip,然后就可以安装包了．
