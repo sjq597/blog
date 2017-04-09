@@ -37,9 +37,9 @@ but was actually of type [com.sun.proxy.$Proxy17
 http://stackoverflow.com/questions/841231/fixing-beannotofrequiredtypeexception-on-spring-proxy-cast-on-a-non-singleton-be
 
 摘一段Spring官方的文档:
-```
+> 
 Applies to proxy mode only. Controls what type of transactional proxies are created for classes annotated with the @Transactional annotation. If "proxy-target-class" attribute is set to "true", then class-based proxies will be created. If "proxy-target-class" is "false" or if the attribute is omitted, then standard JDK interface-based proxies will be created. (See the section entitled Section 6.6, “Proxying mechanisms” for a detailed examination of the different proxy types.)
-```
+
 大概翻译一下就是:是否只采用代理模式来做事务管理,并且有个关键字`class-based proxies`,这样就不会有类型不匹配的了.
 而且这个作者的这个问题也是由于他使用的事务注解而导致的,和我的这个问题非常相像，核心意思是这个注解默认是使用系统的代理模式,即`com.sun.proxy`这个里面的类,但是一般`spring`的项目都是使用的`cglib,aspectj`这类的库来做代理的默认实现,所以导致了以上的这种问题,那么解决方法就是将最开始的配置改为:
 ```
