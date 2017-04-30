@@ -1,4 +1,4 @@
-va.lang.NoSuchMethodError: com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor
+java.lang.NoSuchMethodError: com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor
 
 http://stackoverflow.com/questions/20791351/java-lang-nosuchmethoderror-com-google-common-util-concurrent-moreexecutors-sam
 
