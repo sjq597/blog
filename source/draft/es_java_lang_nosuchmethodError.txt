@@ -1,7 +1,0 @@
-java.lang.NoSuchMethodError: com.google.common.util.concurrent.MoreExecutors.sameThreadExecutor
-
-http://stackoverflow.com/questions/20791351/java-lang-nosuchmethoderror-com-google-common-util-concurrent-moreexecutors-sam
-
-Check your classpath and see what version of guava is being used by your WAR. The error suggests that the version of guava jar being found at runtime does not match the version that was used at compile time.
-
-NoSuchMethodError: com.google.common.util.concurrent.MoreExecutors.directExecutor conflits on Elastic Search jar
