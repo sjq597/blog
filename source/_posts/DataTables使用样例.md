@@ -1,6 +1,6 @@
 title: DataTables使用样例
 date: 2016-10-01 14:01:32
-tags: [Js,databales]
+tags: [JS,Datatables]
 categories: JScript
 ---
 最近开发公司内部系统里面大量要使用到数据的展示,所以最后就研究了一下`DataTables`这个Js的插件，功能确实很强大，总结一下如何使用这个插件以及使用过程中碰到的一些问题。

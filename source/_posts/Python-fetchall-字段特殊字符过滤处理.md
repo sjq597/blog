@@ -1,6 +1,6 @@
 title: Python fetchall()字段特殊字符过滤处理
 date: 2015-11-01 10:50:04
-tags: [Python,sql]
+tags: [Python,SQL]
 categories: [Python笔记]
 ---
 最近在做数据仓库的迁移工作,之前数据仓库的数据都是用的shell脚本来抽取,后来换了python脚本.

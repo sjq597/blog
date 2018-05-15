@@ -1,6 +1,6 @@
 title: DataTables 常用操作
 date: 2016-11-04 17:12:34
-tags: [Js, datatables]
+tags: [JS, Datatables]
 categories: JScript
 ---
 DataTables这个插件功能非常强大，也很灵活，所以这里介绍一下几个项目里用到的常用操作,基本使用可以参考上一篇[DataTables使用样例](2016/10/01/DataTables使用样例)

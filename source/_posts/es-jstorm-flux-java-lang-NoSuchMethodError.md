@@ -1,6 +1,6 @@
 title: es jstorm flux java.lang.NoSuchMethodError
 date: 2017-04-30 10:51:09
-tags: [Java,ES,Jstorm]
+tags: [Java,ElasticSearch,Jstorm]
 categories: Java笔记
 ---
 最近在研究怎么通过Flux来解析日志，前前后后踩了很多坑,毕竟貌似网上也没人这么干过，写一个通用化的代码，只通过配置文件来定义流计算任务．基本上写好了代码,以后再有新的任务都不用再写java代码,然后打包上传提交任务了．

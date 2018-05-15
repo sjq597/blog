@@ -1,7 +1,7 @@
 title: python 连接hive
 date: 2017-06-08 16:44:40
 tags: [Hive, Python]
-categories: [python笔记]
+categories: [Python笔记]
 ---
 首先不要参考官网的例子,pyhs2的作者已经不再更新了，所以你如果用官网的例子，多半会由于版本问题而搞出各种莫名奇妙的问题，这里推荐一下使用dropbox推出的PyHive,[PyHive Github地址](https://github.com/dropbox/PyHive)
 
