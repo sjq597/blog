@@ -1,7 +1,7 @@
 title: Linux运维常用命令备忘录
 date: 2018-05-24 14:47:04
-tags:
-categories:
+tags: [Linux,Shell]
+categories: Linux使用
 ---
 作为一个后端开发,尤其是数据开发,我们很多的服务都是以进程的方式运行在后台.例如Jstorm/Kafka/ElasticSearch等等,线上报警处理也是一个必备技能了,更多的可能是一些磁盘,内存,CPU指标之类的,有些命令不常用可能会忘记,做个记录方便查找.
 
