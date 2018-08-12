@@ -3,29 +3,27 @@ date: 2018-05-13 11:01:18
 tags: [Linux, Shell]
 categories: Linux使用
 ---
-做数据的写代码多了,会经常碰到传输文件的需求,之前还好，一般是下载文件,直接用python内置的server起个服务就搞定了.但是对于跨机房有防火墙存在的情况，一般数据是单向的，就是假设(A-->B)A作为HTTPServer,B可以下载文件.但是反过来就不好使了，因为防火墙策略没有开,(B-->A)用B作为HTTPServer,A无法访问到服务.所以这个时候,A仍然得作为服务端.这里涉及到两个概念，可以简单了解下.
-
-正向代理和反向代理(稍后补充)
+做数据的写代码多了,会经常碰到传输文件的需求,之前还好，一般是下载文件,直接用python内置的server起个服务就搞定了.但是对于跨机房有防火墙存在的情况，一般数据是单向的，就是假设(A-->B)A作为HTTPServer,B可以下载文件.但是反过来就不好使了，因为防火墙策略没有开,(B-->A)用B作为HTTPServer,A无法访问到服务.所以这个时候,A仍然得作为服务端,主要有两种不同的方式.
 
 * nc传输文件
 
-1.正向传输:A->B
-简单来说就是接收端监听本机指定端口的数据,发送端发送到指定接收端端口.
-即:B监听本机指定端口,A向B指定端口发送数据
+1.Data Transfer模式:A(sender/client)->B(receiver/server)
+数据Transfer模式简单来说就是在家等着收数据，可以理解为被动模式.所以`receiver`监听的是本机的端口,然后等着`sender`会把数据发送到这个地方.
 ```
-B: nc -l 12345 | sudo tar -zxvf -
-A: tar -zcvf - file/directory | nc -l {B_IP} 12345
+A(sender): tar -zcvf - file/directory | nc -l {B_IP} 12345
+B(receiver): nc -l 12345 | sudo tar -zxvf -
 ```
-**PS:**注意如果是想B-A传输,对调一下就行,注意服务的开启顺序
+**PS:**`receiver`端先启动,然后启动`sender`发送数据.如果是想`B->A`传输,对调一下就行,注意服务的开启顺序
 
-2.反向传输:A->B
-这个和正向不大一样,就是发送端发送到本机指定端口,接收端监听发送端指定端口数据
-B监听A指定端口数据,A数据发送到本机指定端口
+2.Data Take模式:A(sender/server)->B(receiver/client)
+数据的Take模式和Transfer有一点不大一样,可以理解为主动模式.就是你得自己去指定机器上主动取数据.所以`sender`会把数据发送到本机指定端口,`receiver`从指定机器以及端口获取数据
 ```
-A: nc -l 12345 < file/directory
-B: nc {A_IP} 12345 > file/directory
+A(sender): nc -l 12345 < file/directory
+B(receiver): nc {A_IP} 12345 > file/directory
 ```
-**PS:**注意和上面的顺序不要搞混了
+**PS:**`sender`端先启动,然后启动`receiver`接收数据.注意和第一种方式区分
+
+上面两种传输方式虽然有一点不大一样,不过有一个共同点就是:`server`一定要先启动,然后才是`client`端才启动.但是不管是哪种方式，只要记住一点,就是`client`对`server`提供服务端`port`一定是通的,比如说本机可以访问服务器指定端口的服务,但是服务器就无法访问本机指定端口服务，所以不管是想从服务器拷贝数据还是发送数据到服务器,服务器只能是`server`.
 
 * 配合pv使用
 
@@ -38,4 +36,3 @@ B:nc {A_IP} 9099 > heap.bin
 -r, --rate               show data transfer rate counter
 -L, --rate-limit RATE    limit transfer to RATE bytes per second
 ```
-
