@@ -1,6 +1,6 @@
 title: MySQL 创建用户以及附权限
 date: 2016-04-23 12:50:52
-tags: [SQL, Linux]
+tags: [MySQL, Linux]
 categories: MySQL
 ---
 有时候为了测试，需要单独建一些MySQL用户来限定这部分用户的权限，并且需要限定哪些ip可以访问到我的数据库，具体步骤为,在装有MysQL的机器上执行：
