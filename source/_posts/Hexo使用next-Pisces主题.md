@@ -77,6 +77,15 @@ title: 个人简介
 date: 2018-05-14 23:38:55
 ---
 ```
+### 切换主题布局
+可以看到`_config.yaml`文件中默认是使用的`Muse`主题,这个主题是把标签之类的放到顶部,我更喜欢双栏布局，所以把对应部分改成下面这样:
+```
+# Schemes
+#scheme: Muse
+#scheme: Mist
+scheme: Pisces
+#scheme: Gemini
+```
 
 ## 设置语言
 默认语言在`~/Blog/next/languages`下面:
