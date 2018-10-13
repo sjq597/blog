@@ -101,3 +101,6 @@ scheme: Pisces
 language: zh-CN
 timezone: Asia/Chongqing
 ```
+
+# GitComment
+如果你配了用GitComment来作为你的博客评论，那你还需要改下对应得配置,不然评论都不会显示了,详情可以参见:[Hexo 使用Gitment评论功能](../../18/Hexo-使用Gitment评论功能/)

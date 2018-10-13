@@ -6,6 +6,7 @@
     "version": "3.7.1"
   },
   "dependencies": {
+    "gitment": "0.0.3",
     "hexo": "^3.1.0",
     "hexo-deployer-git": "^0.1.0",
     "hexo-generator-archive": "^0.1.2",
@@ -13,8 +14,8 @@
     "hexo-generator-index": "^0.1.2",
     "hexo-generator-tag": "^0.1.1",
     "hexo-renderer-ejs": "^0.1.0",
-    "hexo-renderer-stylus": "^0.3.0",
     "hexo-renderer-marked": "^0.2.4",
+    "hexo-renderer-stylus": "^0.3.0",
     "hexo-server": "^0.1.2"
   }
 }
