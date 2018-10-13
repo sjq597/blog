@@ -15,7 +15,7 @@ pip install shadowsocks
 接下来，你需要将项目的代码打包安装，命令如下：
 >sudo python setup.py install
 
-![shadowsocks 目录结构](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网01.png)
+![shadowsocks 目录结构](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网01.png)
 然后编辑`/etc/shadowsocks.json`。没有则创建一个这个文件。，编辑内容如下：
 ```json
 {
@@ -36,7 +36,7 @@ pip install shadowsocks
 >sslocal -c /etc/shadowsocks.json
 
 成功启动的界面就是下面这样的：
-![启动代理服务](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网02.png)
+![启动代理服务](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网02.png)
 
 然后你需要在浏览器里设置代理，注意`shadowsocks`是`socks 5`代理，所以和`vpn`还不太一样，默认不是全局代理的，也就是说你的应用
 没有办法翻墙，但是浏览器可以。
@@ -50,17 +50,17 @@ pip install shadowsocks
 然后把插件拖到浏览器，安装即可。
 
 安装好之后需要进行规则的设置，在工具栏点插件图标，选择`options`，如图`Proxy Profiles`：
-![Proxy Profiles界面](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网03.png)
+![Proxy Profiles界面](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网03.png)
 注意`SOCKS Host`地址和端口设置分别为`127.0.0.1`和`1080`。特别注意要选`SOCKS v5`。不代理的地址可以加在下面`No Proxy for`里面。
 
 还需要设置切换规则，也就是哪些特定的地址用代理，哪些不用，这样有个好处，比如你点开国内的不用代理的网站更快，而且有的号是需要流量的，这样还可以省流量,`Switch Rules`：
-![Switch Rules界面](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网04.png)
+![Switch Rules界面](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网04.png)
 上面那些地址就是需要代理的，注意选你能用的代理，我这个插件由于开始使用了`goagent`，导入了`goagent`的配置文件，所以有三个代理。
 但是正是`goagent`的`ip`都不好用，而且人多就卡，非常不稳定，我才决定折腾一下`shadowsocks`。代理规则可以自己填或者从配置文件导入.具体的配置文件[百度盘连接](http://pan.baidu.com/s/1jGpOLvg)
 用法就是在插件的`Import/Export`选项里，`Switch Rules`里`Export Rules List`即可。
-![导入代理规则](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网05.png)
+![导入代理规则](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网05.png)
 手机上的教程就不多讲了，只讲我的`android`手机配置吧。具体可以取网上搜，也是下一个手机的客户端，在配置文件里配置好你的
 手机客户端，我在`google play`下载的，放心，绝对安全，[百度盘地址](http://pan.baidu.com/s/1ntF1drF)
 安装之后，点左上角，添加配置文件，配置文件界面如下：
-![安卓代理设置](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu-14-04使用shadowsocks-科学上网06.png)
+![安卓代理设置](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu-14-04使用shadowsocks-科学上网06.png)
 把你的`shadowsocks`服务器地址，端口以及密码和加密算法填完就`ok`。然后点右上角就可以打开了。

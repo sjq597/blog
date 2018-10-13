@@ -10,7 +10,7 @@ categories: Kafka
 
 ## 常用MQ介绍
 这里我不会对其他MQ做过多的介绍，但是市面上的主流MQ也必须有个大概的了解，之所以流行开来也是有其独特的优势,`Kafka`也不例外,先放一张[阿里云栖社区](https://yq.aliyun.com/articles/62834)做的MQ对比图:
-![业界主流MQ对比](http://7xn9y9.com1.z0.glb.clouddn.com/Kafka%E6%91%B8%E9%B1%BC%E7%B3%BB%E5%88%9701-%E7%99%BE%E4%B8%87QPS%E5%90%9E%E5%90%90%E9%87%8F01.png)
+![业界主流MQ对比](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Kafka%E6%91%B8%E9%B1%BC%E7%B3%BB%E5%88%9701-%E7%99%BE%E4%B8%87QPS%E5%90%9E%E5%90%90%E9%87%8F01.png)
 主要看下吞吐量这个地方,除了和`RocketMQ`领先的不多，基本上是碾压其他的`MQ`.一般性能好的`MQ`吞度量能达到几十万这个量级就非常厉害了,但是可以看到用机械磁盘的`Kafka`单机`TPS`差不多可以到200w了,那么对于一个集群而言,几百万的`TPS`完全不在话下.
 
 **这就引出了本文要讨论的一个重要问题:`Kafka`为什么这么快,吞吐量为何这么惊人?**

@@ -89,7 +89,7 @@ plugins=(git textmate ruby autojump osx mvn gradle)
 * git
 
 当你处于一个`git`受控的目录下时，`Shell 会明确显示 「git」和 branch，如下图所示：
-![zsh-git 插件效果](http://7xn9y9.com1.z0.glb.clouddn.com/note_终极%20Shell——zsh01.png)
+![zsh-git 插件效果](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_终极%20Shell——zsh01.png)
 
 另外对`git`很多命令进行了简化，例如`gco=’git checkout’、gd=’git diff’、gst=’git status’、g=’git’`等等，熟练使用可以大大减少`git`的命令长度，命令内容可以参考`~/.oh-my-zshplugins/git/git.plugin.zsh`
 

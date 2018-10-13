@@ -24,9 +24,9 @@ sudo apt-get install aria2
 * 下载文件
 
 安装好`aria2`以及`BaiduExporter`之后,我们以一个百度云里面的文件来做个测试:
-![下载文件链接](http://7xn9y9.com1.z0.glb.clouddn.com/Ubuntu%2016.04%20aria2%20%E7%99%BE%E5%BA%A6%E7%9B%98%E4%B8%8B%E8%BD%BD01.png)
+![下载文件链接](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Ubuntu%2016.04%20aria2%20%E7%99%BE%E5%BA%A6%E7%9B%98%E4%B8%8B%E8%BD%BD01.png)
 注意是勾选所需要下载的文件,然后会多出一个**导出下载**标签页,然后我们需要点列表中的`导出下载`,然后就会弹出一个框:
-![aria2下载链接框](http://7xn9y9.com1.z0.glb.clouddn.com/Ubuntu%2016.04%20aria2%20%E7%99%BE%E5%BA%A6%E7%9B%98%E4%B8%8B%E8%BD%BD02.png)
+![aria2下载链接框](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Ubuntu%2016.04%20aria2%20%E7%99%BE%E5%BA%A6%E7%9B%98%E4%B8%8B%E8%BD%BD02.png)
 把框里面的内容全部复制出来,直接丢到终端中执行，注意文件会保存到当前路径,如果你想保存到指定位置，还是先cd到指定目录吧.
 下载的命令如下:
 ```

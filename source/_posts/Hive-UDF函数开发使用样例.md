@@ -149,7 +149,7 @@ public class BusinessType extends UDF {
 * 依赖的jar包这里可以不用,Hive,Hadoop里都有,除非有其他包你需要加入,全选上,点`-`号都去掉
 
 回到IDEA主界面,`Build-->Make Project`.在输出路径就可以找到jar包了
-![打包设置界面](http://7xn9y9.com1.z0.glb.clouddn.com/Hive%20UDF函数开发样例01.png)
+![打包设置界面](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Hive%20UDF函数开发样例01.png)
 还有个打包比较简单的,直接用jar命令,以本程序为例
 ```
 cd target/classes

@@ -15,7 +15,7 @@ cd terminator
 sudo touch config
 ```
 安装完了之后，打开一个窗口，类似于下面：
-![Terminator 窗口](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu%2014.04%20多终端窗口合并01.png)
+![Terminator 窗口](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu%2014.04%20多终端窗口合并01.png)
 
 #### 修改默认配置
 下面配置一下这个终端的颜色，我使用`solarized`配色,修改配置文件：
@@ -562,9 +562,9 @@ alias la='ls -A'
 alias l='ls -CF'
 ```
 [dircolors-solarized github地址](https://github.com/seebi/dircolors-solarized)最后效果如下：
-![dircolors-solarized配色](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu%2014.04%20多终端窗口合并02.png)
+![dircolors-solarized配色](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu%2014.04%20多终端窗口合并02.png)
 
 #### 分屏操作
 在终端上的某个终端窗口右键，就可以`Split Horizontally`以及`Split Vertically`进行屏幕分割，这个操作可以类推，效果类似于：
-![最终分屏效果](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu%2014.04%20多终端窗口合并03.png)
+![最终分屏效果](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu%2014.04%20多终端窗口合并03.png)
 

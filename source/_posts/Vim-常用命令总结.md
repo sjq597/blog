@@ -118,7 +118,7 @@ w		# 到下一个单词的开头
 e		# 到下一个单词的结尾
 ```
  **注意：** 默认情况，单词是由字母，数字，下划线组成，如果认为是blank字符分隔，则需要使用`E`和`W`，如下如所示：
-![e,w和E,W区别](http://7xn9y9.com1.z0.glb.clouddn.com/note_vim%20常用命令总结01.jpg)
+![e,w和E,W区别](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_vim%20常用命令总结01.jpg)
 
  其实这并不是最强的光标移动，下面来看看最快的光标如何移动：
 ```bash

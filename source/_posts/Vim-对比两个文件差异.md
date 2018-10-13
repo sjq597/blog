@@ -22,5 +22,5 @@ sudo -uuser_name /home/dev/hive-0.12.0/bin/hive -database dw_subject -e "select 
 sudo vim -d source.txt subject.txt
 ```
  最终的效果如下图所示:
-![Vim对比效果](http://7xn9y9.com1.z0.glb.clouddn.com/用Vim来对比两个文件的不同01.jpg)
+![Vim对比效果](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/用Vim来对比两个文件的不同01.jpg)
 

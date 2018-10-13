@@ -543,7 +543,7 @@ table.find('thead > tr').append('<th>' + v + '</th>')
 ```
 这样就完成了一个简单的前后端交互表格的服务器端分页的例子,访问[http://127.0.0.1:5000/data_table](http://127.0.0.1:5000/data_table)完成后的效果如下:
 
-![DataTables样例效果](http://7xn9y9.com1.z0.glb.clouddn.com/DataTables%E4%BD%BF%E7%94%A8%E6%A0%B7%E4%BE%8B01.jpg)
+![DataTables样例效果](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/DataTables%E4%BD%BF%E7%94%A8%E6%A0%B7%E4%BE%8B01.jpg)
 
 ### DataTables一些配置解释
 这里又一份非常详细的参数说明，不太清楚的可以先看看这个,这个是别人总结的，可以参考一下这些参数的含义

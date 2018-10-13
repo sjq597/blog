@@ -46,5 +46,5 @@ def hell(poorly_named_var)
         puts("Hi, " + poorly_named_var)
 	end 
 ```
-![vim-multiple-cursors插件多光标效果](http://7xn9y9.com1.z0.glb.clouddn.com/Vim%20编程常用高效必备插件01.gif)
+![vim-multiple-cursors插件多光标效果](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Vim%20编程常用高效必备插件01.gif)
 上图的演示过程就是，具体的操作就是将光标移到变量的第一个字母，然后按`<Crrl-n>`就是增加一个，按`<Ctrl-p>`就是减少一个。连按三下都选中，然后按`c`,然后输入name即是上面的效果。

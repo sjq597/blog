@@ -17,7 +17,7 @@ categories: [开发环境]
 >sudo ln -s apache-maven-3.0.5 apache-maven
 
 查看一下是否成功
-![查看链接是否创建](http://7xn9y9.com1.z0.glb.clouddn.com/note_Ubuntu配置maven01.png)
+![查看链接是否创建](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Ubuntu配置maven01.png)
 
 * 编辑环境变量
 

@@ -10,14 +10,14 @@ categories: [博客搭建]
 ### 使用七牛运存储
 没有账号可以去注册，实名认证之后就可以使用云存储服务了。
 * 新建空间
-![新建一个存储空间](http://7xn9y9.com1.z0.glb.clouddn.com/note_Hexo%20使用七牛图床01.png)
+![新建一个存储空间](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Hexo%20使用七牛图床01.png)
 **注意：** 一定要选公开空间，不然别人访问不到，开始一直没找到外链的链接在哪里，最后发现是自己开始把空间设置成私有空间了。
 
 * 引用图片
 把图片链接地址放到你想加载图片的地方，图片的地址是：
-![图片外链地址](http://7xn9y9.com1.z0.glb.clouddn.com/note_Hexo%20使用七牛图床02.png)
+![图片外链地址](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Hexo%20使用七牛图床02.png)
 
 ### 图片显示
 虽然这样可以显示了，但是在我的博客里显示的时候，图片特别小，有点儿看不清，后来才发现是七牛的默认设置图片显示尺寸太小，去七牛的控制台里设置自己的样式。
 在`数据处理->图片处理里`，点`新建图片样式`，我把图片的宽度设的很大，这样就基本可以保持很清晰的图片样式了。
-![新建图片样式](http://7xn9y9.com1.z0.glb.clouddn.com/note_Hexo%20使用七牛图床03.png)
+![新建图片样式](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/note_Hexo%20使用七牛图床03.png)

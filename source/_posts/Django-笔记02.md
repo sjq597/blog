@@ -214,7 +214,7 @@ python manage.py createsuperuser
 ```
 后面照着填就行了。开启服务器：`python manage.py runserver`,访问`http://127.0.0.1:8000/admin/`。
 登陆进去之后界面大概是这样的：
-![Django 后台管理模块](http://7xn9y9.com1.z0.glb.clouddn.com/Django%20%E7%AC%94%E8%AE%B00201.png)
+![Django 后台管理模块](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Django%20%E7%AC%94%E8%AE%B00201.png)
 
 ### 导入模块到后台管理
 编辑`polls/admin.py`文件，内容如下：
@@ -227,7 +227,7 @@ from models import Question
 admin.site.register(Question)
 ```
 把模块注册到后台管理模块中之后，就可以在管理模块中操作我们的数据了，再次刷新就可以看到我们的模块了：
-![polls模块](http://7xn9y9.com1.z0.glb.clouddn.com/Django%20%E7%AC%94%E8%AE%B00202.png)
+![polls模块](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Django%20%E7%AC%94%E8%AE%B00202.png)
 还可以添加管理数据：
-![后台管理数据库数据](http://7xn9y9.com1.z0.glb.clouddn.com/Django%20%E7%AC%94%E8%AE%B00203.png)
+![后台管理数据库数据](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Django%20%E7%AC%94%E8%AE%B00203.png)
 这些数据会根据自己的类型选择自己的展示方式，日期的会有一个日历展示框。

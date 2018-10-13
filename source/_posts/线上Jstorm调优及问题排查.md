@@ -12,9 +12,9 @@ categories: 数据架构
 
 ### 问题排查
 首先既然是磁盘被耗光了,那先看下磁盘上哪个`Worker`日志文件占用的磁盘空间最多,定位到具体的`Worker`之后,我们可以看下jvm运行信息:
-![Jstorm Worker Jvm运行统计](http://7xn9y9.com1.z0.glb.clouddn.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5001.jpg)
+![Jstorm Worker Jvm运行统计](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5001.jpg)
 可以看到`Perm`区已经`100%`了，其他几个区使用率很低,`FullGC`一直在增加,这个时候基本上就可以判断是`Perm`区的问题了，我们再确认下`Worker`的启动参数,直接`ps -axu | grep 32502`即可:
-![Work启参数](http://7xn9y9.com1.z0.glb.clouddn.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5002.jpg)
+![Work启参数](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5002.jpg)
 注意下红色标出来的部分`-XX:PermSize=33554432 -XX:MaxPermSize=33554432`,算一下基本就是`32M`这么大.方法区一般存的就是类的信息,这说明加载了太多的`Class`,可以用`jmap -histo:live 32502`看下，会发现确实有好多`xxxClass`的实例,说明确实是．最后我还看了对应的代码文件，发现也的确是用到了很多的的包，并且还是写在`static`代码块做初始化的．所以最后我改了下启动参数,具体为修改`storm.yaml`文件:
 > 
 nimbus.childopts: " -Xms1g -Xmx1g -Xmn500m -XX:PermSize=50m -XX:SurvivorRatio=4 -XX:MaxTenuringThreshold=15 -XX:+UseConcMarkSweepGC -XX:+UseCMSInitiatingOccupancyOnly -XX:CMSInitiatingOccupancyFraction=70 -XX:CMSFullGCsBeforeCompaction=5 -XX:+HeapDumpOnOutOfMemoryError -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=100M -XX:+UseCMSCompactAtFullCollection -XX:CMSMaxAbortablePrecleanTime=5000 "
@@ -33,5 +33,5 @@ nimbus.childopts: " -Xms1g -Xmx1g -Xmn500m -XX:PermSize=50m -XX:SurvivorRatio=4 
 另外还有个人建议不使用`Jstorm`的理由,从去年发布`Jstorm 2.2/2.4`之后,差不多有一年都没有更新了,社区活跃度不高,`Issue`基本上没人管了.不过有些东西比较有价值的,`flue-core`,这个东西其实是`Storm`的一个插件,当让也可以在`Jstorm`里面用,简单来说就是可以写一个`yaml`配置文件去定义一个作业,这样就不用再编译提交`jar`包来启动作业了．那么我们可以定义或者提前编写一些通用的公共`bolt`组件,做一个平台来开发`Jstorm`作业,可以做到页面化开发而不用手写`Java`代码.
 
 最后说一下自己在使用这些大数据的开源组件的一些见解,其实用过很多组件之后会发现,他们之间会有一些共同的设计理念,举个`flume`的例子:
-![flume架构](http://7xn9y9.com1.z0.glb.clouddn.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5003.png)
+![flume架构](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/%E7%BA%BF%E4%B8%8AJstorm%E8%B0%83%E4%BC%98%E5%8F%8A%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5003.png)
 这里有三个比较重要的组件:`source,channel,sink`.我不知道是不是`flume`首创的这个,但是从组件的开源时间上来看应该是.很巧的是`flink`里面也是这么个结构,所以确实可以说这个结构真的是一个优秀的设计思想.尤其是`channel`这个思想,其实很多的开源组件在设计的时候并没有引入这种设计,比如`Canal`,所以只能自己去实现具体的数据存储功能,其实这个是不利于推广的,不能开箱即用.正因为`Channel`的存在,所以`source/sink`可以实现复用及自由组合,比较灵活,扩展性很强,但是需要有一个`Channel`支撑,`Kafka`就是这么个存在,所以`Kafka`的那几个哥们后来出来创业了,围绕`Kafka`创建了[Confluent](https://www.confluent.io),这个里面围绕`Kafka`创建了各种不同的`source/sink`,基本涵盖了所有的数据源以及存储源,这种通过一个`Channel`来缓冲以及解藕不同的逻辑单元,在数据处理领域来说应该是一种非常值得借鉴的思想.在建设基础数据体系或者一个系统的时候,可以多考虑这种结构.

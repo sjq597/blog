@@ -55,7 +55,7 @@ def create_app():
     return app
 ```
 看到这里确实有问题，我们来梳理一下这个引用关系:
-![循环依赖图](http://7xn9y9.com1.z0.glb.clouddn.com/Flask%20%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%AF%BC%E5%85%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%9501.png)
+![循环依赖图](https://blog-1254094716.cos.ap-chengdu.myqcloud.com/Flask%20%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E5%AF%BC%E5%85%A5%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%9501.png)
 我们对照着这个图分析一下怎么产生循环依赖的:
 ```
 1. __init__.py 先import web/security/views.py,然后声明变量db
