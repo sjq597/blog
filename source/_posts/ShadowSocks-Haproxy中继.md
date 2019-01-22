@@ -52,6 +52,10 @@ backend ss-out
 由于你改了安全组规则，所以需要重启你的服务器实例,重启好了之后,需要启动haproxy服务,不同的机器不一样，以我的腾讯云主机为例:
 ```
 systemctl start haproxy.service
+# 设置成开机启动(CentOS7)
+systemctl enable haproxy.service
+# 设置成开机启动(CentOS6,没测试过，网上查的)
+chkconfig –level 3 haproxy.service on
 ```
 启动服务之后可以检测一下服务是否开启了,直接用`ps`命令即可.
 
