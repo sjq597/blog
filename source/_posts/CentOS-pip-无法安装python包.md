@@ -22,7 +22,7 @@ sudo pip install --upgrade sqlalchemy
 ```
 仍然报错：
 > 
-The repository located at pypi.corp.qunar.com is not a trusted or secure host and is being ignored. If this repository is available via HTTPS it is recommended to use HTTPS instead, otherwise you may silence this warning and allow it anyways with '--trusted-host pypi.abc.def.com'.
+The repository located at pypi.xxx.xxx.com is not a trusted or secure host and is being ignored. If this repository is available via HTTPS it is recommended to use HTTPS instead, otherwise you may silence this warning and allow it anyways with '--trusted-host pypi.abc.def.com'.
 
 依然按照建议加上参数：
 ```bash

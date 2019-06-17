@@ -11,10 +11,10 @@ Linux下使用VPN十分简单，只需要安装一软件即可。
 sudo apt-get install vpnc
 ```
 
-* 找到公司的默认配置文件`qunar_common.pcf`,使用命令将其转化成对应的配置文件
+* 找到公司的默认配置文件`xxx_common.pcf`,使用命令将其转化成对应的配置文件
 
 ```bash
-sudo pcf2vpnc Documents/qunar_common.pcf default.conf
+sudo pcf2vpnc Documents/xxx_common.pcf default.conf
 ```
 
 * 替换配置文件

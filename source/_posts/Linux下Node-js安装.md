@@ -8,10 +8,10 @@ categories: [博客搭建]
 
 #### 解压缩：
 ```
-tar -xvf node-v4.1.1-linux-x64.tar.gz -C /usr/qunar/
-cd /usr/qunar
+tar -xvf node-v4.1.1-linux-x64.tar.gz -C /usr/xxx/
+cd /usr/xxx
 sudo mv node-v4.1.1-linux-x64 node
-export PATH=/usr/qunar/node/bin/:$PATH
+export PATH=/usr/xxx/node/bin/:$PATH
 node -v
 ```
 
@@ -29,9 +29,9 @@ export PATH=${JAVA_HOME}/bin:$PATH
 ```
 #--------------------测试----------------------------
 #创建nodejs项目目录
-mkdir -p /usr/qunar/nodejs/
+mkdir -p /usr/xxx/nodejs/
 #创建hello.js文件
-vi /usr/qunar/nodejs/hello.js
+vi /usr/xxx/nodejs/hello.js
 #内容如下：
 var http = require("http");
 http.createServer(function(request, response) {	

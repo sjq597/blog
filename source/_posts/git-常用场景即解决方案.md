@@ -42,7 +42,7 @@ git pull	// 读取的配置文件为~/.ssh/id_rsa
 ```
 可以试一下有什么区别:
 
-* ssh -vT git@gitlab.corp.xxx.com
+* ssh -vT git@gitlab.xxx.xxx.com
 
 ```
 debug1: identity file /home/anonymous/.ssh/id_rsa type 1
@@ -62,7 +62,7 @@ debug1: key_load_public: No such file or directory
 debug1: identity file /home/anonymous/.ssh/id_ed25519-cert type -1
 ```
 
-* sudo ssh -vT git@gitlab.corp.xxx.com
+* sudo ssh -vT git@gitlab.xxx.xxx.com
 
 ```
 debug1: key_load_public: No such file or directory

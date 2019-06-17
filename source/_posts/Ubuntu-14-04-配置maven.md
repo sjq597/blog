@@ -11,7 +11,7 @@ categories: [开发环境]
 >tar -xvzf apache-maven-3.0.5-bin.tar.gz
 
 把压缩包就放在当前解压目录，或者放到制定目录
->cp -r apache-maven-3.0.5 /usr/qunar/
+>cp -r apache-maven-3.0.5 /usr/xxx/
 
 现在已经创建好了一个`Maven`安装目录`apache-maven-3.0.5`，虽然直接使用该目录配置环境变量之后就能使用`Maven`了，但推荐做法是，在安装目录旁平行地创建一个符号链接，以方便日后的升级：
 >sudo ln -s apache-maven-3.0.5 apache-maven
@@ -25,18 +25,18 @@ categories: [开发环境]
 
 在文件末尾加入以下内容
 ```bash
-export M2_HOME=/usr/qunar/apache-maven
+export M2_HOME=/usr/xxx/apache-maven
 export PATH=$PATH:${M2_HOME}/bin
 ```
 
 更新一下文件，然后再测试是否成功
 ```bash
-​➜  qunar source ~/.bashrc
-➜  qunar mvn -v
+​➜  xxx source ~/.bashrc
+➜  xxx mvn -v
 Apache Maven 3.0.5 (r01de14724cdef164cd33c7c8c2fe155faf9602da; 2013-02-19 21:51:28+0800)
-Maven home: /usr/qunar/apache-maven
+Maven home: /usr/xxx/apache-maven
 Java version: 1.7.0_40, vendor: Oracle Corporation
-Java home: /usr/qunar/jdk1.7.0_40/jre
+Java home: /usr/xxx/jdk1.7.0_40/jre
 Default locale: zh_CN, platform encoding: UTF-8
 OS name: "linux", version: "3.13.0-32-generic", arch: "amd64", family: "unix"
 ```
@@ -71,7 +71,7 @@ OS name: "linux", version: "3.13.0-32-generic", arch: "amd64", family: "unix"
             <repositories>
                 <repository>
                     <id>QunarNexus</id>
-                    <url>http://svn.corp.qunar.com:8081/nexus/content/groups/public</url>
+                    <url>http://svn.xxx.xxx.com:8081/nexus/content/groups/public</url>
                     <releases>
                         <enabled>true</enabled>
                         <!-- always , daily (default), interval:X (where X is 
@@ -87,7 +87,7 @@ OS name: "linux", version: "3.13.0-32-generic", arch: "amd64", family: "unix"
             <pluginRepositories>
                 <pluginRepository>
                     <id>QunarNexus</id>
-                    <url>http://svn.corp.qunar.com:8081/nexus/content/groups/public</url>
+                    <url>http://svn.xxx.xxx.com:8081/nexus/content/groups/public</url>
                     <releases>
                         <enabled>true</enabled>
                         <checksumPolicy>warn</checksumPolicy>
