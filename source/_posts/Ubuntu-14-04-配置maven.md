@@ -70,7 +70,7 @@ OS name: "linux", version: "3.13.0-32-generic", arch: "amd64", family: "unix"
             <id>local</id>
             <repositories>
                 <repository>
-                    <id>QunarNexus</id>
+                    <id>xxxNexus</id>
                     <url>http://svn.xxx.xxx.com:8081/nexus/content/groups/public</url>
                     <releases>
                         <enabled>true</enabled>
@@ -86,7 +86,7 @@ OS name: "linux", version: "3.13.0-32-generic", arch: "amd64", family: "unix"
             </repositories>
             <pluginRepositories>
                 <pluginRepository>
-                    <id>QunarNexus</id>
+                    <id>xxxNexus</id>
                     <url>http://svn.xxx.xxx.com:8081/nexus/content/groups/public</url>
                     <releases>
                         <enabled>true</enabled>
