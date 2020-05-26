@@ -10,10 +10,10 @@ categories: Linux使用
 1.Data Transfer模式:A(sender/client)->B(receiver/server)
 数据Transfer模式简单来说就是在家等着收数据，可以理解为被动模式.所以`receiver`监听的是本机的端口,然后等着`sender`会把数据发送到这个地方.
 ```
-A(sender): tar -zcvf - file/directory | nc -l {B_IP} 12345
+A(sender): tar -zcvf - file/directory | nc {B_IP} 12345
 B(receiver): nc -l 12345 | sudo tar -zxvf -
 ```
-**PS:**`receiver`端先启动,然后启动`sender`发送数据.如果是想`B->A`传输,对调一下就行,注意服务的开启顺序
+**PS:**`receiver`端先启动,然后启动`sender`发送数据.如果是想`B->A`传输,对调一下就行,注意服务的开启顺序。不管是哪种情况，要确保`send`对`receiver`的网络是通的，即数据可以发送到接收端。验证方式也比较简单，可以在接收端运行`python -m SimpleHTTPServer 12345`,然后在发送端执行`telnet {B_IP} 12345`。
 
 2.Data Take模式:A(sender/server)->B(receiver/client)
 数据的Take模式和Transfer有一点不大一样,可以理解为主动模式.就是你得自己去指定机器上主动取数据.所以`sender`会把数据发送到本机指定端口,`receiver`从指定机器以及端口获取数据
