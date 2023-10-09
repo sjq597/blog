@@ -105,3 +105,9 @@ deploy:
   type: git
   repository: http://github.com/sjq597/sjq597.github.io.git
   branch: master
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
