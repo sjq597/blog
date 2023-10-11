@@ -6,7 +6,8 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "cloud": "git clone https://github.com/next-theme/hexo-theme-next themes/next && cp theme.yml.bak themes/next/_config.yml && hexo generate"
   },
   "hexo": {
     "version": "6.3.0"
